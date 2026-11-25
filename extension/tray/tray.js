@@ -2,13 +2,39 @@
 // Everything shown here comes from the current tab's content script and is rendered
 // with textContent only (never innerHTML), so page content can't inject markup.
 
-const t = (key, subs) => chrome.i18n.getMessage(key, subs) || key;
+const LANGS = ['en', 'vi', 'fr'];
+let messages = null; // set when the user picked a language other than the browser's
+
+// Same format as chrome.i18n: messages.json with optional $NAME$ placeholders.
+function t(key, subs = []) {
+  const entry = messages?.[key];
+  if (!entry) return chrome.i18n.getMessage(key, subs) || key;
+  let text = entry.message;
+  for (const [name, ph] of Object.entries(entry.placeholders || {})) {
+    const n = Number(ph.content.replace('$', '')) - 1;
+    text = text.replace(new RegExp(`\\$${name}\\$`, 'gi'), subs[n] ?? '');
+  }
+  return text;
+}
+
+async function loadLanguage() {
+  const { lang = 'auto' } = await chrome.storage.local.get('lang');
+  if (LANGS.includes(lang)) {
+    messages = await fetch(`../_locales/${lang}/messages.json`).then((r) => r.json()).catch(() => null);
+  }
+  for (const el of document.querySelectorAll('[data-i18n]')) el.textContent = t(el.dataset.i18n);
+  for (const el of document.querySelectorAll('[data-i18n-title]')) el.title = t(el.dataset.i18nTitle);
+  const select = $('lang');
+  select.value = LANGS.includes(lang) ? lang : 'auto';
+  select.addEventListener('change', async () => {
+    await chrome.storage.local.set({ lang: select.value });
+    location.reload();
+  });
+}
+
 const $ = (id) => document.getElementById(id);
 const isPanel = new URLSearchParams(location.search).has('panel');
 if (isPanel) document.body.classList.add('panel');
-
-for (const el of document.querySelectorAll('[data-i18n]')) el.textContent = t(el.dataset.i18n);
-for (const el of document.querySelectorAll('[data-i18n-title]')) el.title = t(el.dataset.i18nTitle);
 
 let tabId = null;
 let host = '';
@@ -138,6 +164,8 @@ if (isPanel) {
     if (id === tabId && info.status === 'complete') refresh();
   });
 }
+
+await loadLanguage();
 
 fetch('../data/lists-info.json')
   .then((r) => r.json())

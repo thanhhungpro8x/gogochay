@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 # Wraps the extension into a Safari Web Extension Xcode project (macOS + Xcode required).
 #   ./scripts/build-safari.sh
-# Then open safari/Ad Tray/Ad Tray.xcodeproj, choose the "Ad Tray (macOS)" scheme and Run.
+# Then open safari/Ad Tray/Ad Tray.xcodeproj, choose the "Ad Tray" scheme and Run.
 # For personal use without a paid Apple Developer account: Safari > Settings > Advanced >
-# "Show features for web developers", then Develop > "Allow Unsigned Extensions".
+# "Show features for web developers", then Settings > Developer > "Allow unsigned extensions".
+# No Xcode? Download the "ad-tray-safari" artifact built by GitHub Actions instead (see README).
 set -euo pipefail
 cd "$(dirname "$0")/.."
 node scripts/verify.mjs
@@ -12,5 +13,5 @@ xcrun safari-web-extension-converter extension \
   --project-location safari \
   --app-name "Ad Tray" \
   --bundle-identifier fr.thanhhungdoan.adtray \
-  --swift --copy-resources --no-open --force
+  --swift --macos-only --copy-resources --no-open --no-prompt --force
 echo "Done: open safari/Ad\ Tray/Ad\ Tray.xcodeproj"

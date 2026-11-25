@@ -48,5 +48,11 @@
         "content": "$1"
       }
     }
+  },
+  "language": {
+    "message": "Ngôn ngữ"
+  },
+  "langAuto": {
+    "message": "Theo trình duyệt"
   }
 }

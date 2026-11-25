@@ -48,5 +48,11 @@
         "content": "$1"
       }
     }
+  },
+  "language": {
+    "message": "Langue"
+  },
+  "langAuto": {
+    "message": "Langue du navigateur"
   }
 }

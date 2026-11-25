@@ -38,3 +38,36 @@ jobs:
         with:
           name: ad-tray-chrome
           path: dist/ad-tray-chrome.zip
+
+  # Builds the Safari version on GitHub's macOS machines (they have Xcode), so you
+  # don't need Xcode locally. The app is ad-hoc signed ("Sign to Run Locally"):
+  # fine for testing with Safari's "Allow unsigned extensions", not for the App Store.
+  safari:
+    runs-on: macos-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node scripts/verify.mjs
+      - name: Convert to a Safari Web Extension project
+        run: |
+          xcrun safari-web-extension-converter extension \
+            --project-location safari --app-name "Ad Tray" \
+            --bundle-identifier fr.thanhhungdoan.adtray \
+            --swift --macos-only --copy-resources --no-open --no-prompt --force
+      - name: Build (ad-hoc signed)
+        run: |
+          xcodebuild -project "safari/Ad Tray/Ad Tray.xcodeproj" -scheme "Ad Tray" \
+            -configuration Release -derivedDataPath build \
+            CODE_SIGN_IDENTITY="-" CODE_SIGN_STYLE=Manual DEVELOPMENT_TEAM="" \
+            build
+      - name: Zip the app
+        run: |
+          mkdir -p dist
+          ditto -c -k --keepParent "build/Build/Products/Release/Ad Tray.app" dist/ad-tray-safari.zip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ad-tray-safari
+          path: dist/ad-tray-safari.zip

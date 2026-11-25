@@ -37,8 +37,14 @@
   <footer>
     <button id="openPanel" class="link" data-i18n="openPanel" hidden></button>
     <span id="listsInfo" class="muted"></span>
+    <select id="lang" data-i18n-title="language">
+      <option value="auto" data-i18n="langAuto"></option>
+      <option value="en">English</option>
+      <option value="vi">Tiếng Việt</option>
+      <option value="fr">Français</option>
+    </select>
   </footer>
 
-  <script src="tray.js"></script>
+  <script type="module" src="tray.js"></script>
 </body>
 </html>

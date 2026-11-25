@@ -3,11 +3,33 @@
 // All hostnames are mapped to 127.0.0.1, so no real ad server is contacted.
 import puppeteer from 'puppeteer-core';
 import { start, hits } from './server.mjs';
+import { existsSync, readdirSync } from 'node:fs';
+
+// CHROME_PATH, else a Chrome for Testing downloaded with `npx @puppeteer/browsers install chrome@stable`
+function findChrome() {
+  if (process.env.CHROME_PATH) return process.env.CHROME_PATH;
+  const base = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../chrome');
+  if (existsSync(base)) {
+    for (const v of readdirSync(base).sort().reverse()) {
+      for (const rel of [
+        'chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing',
+        'chrome-mac-x64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing',
+        'chrome-linux64/chrome',
+        'chrome-win64/chrome.exe',
+      ]) {
+        const p = path.join(base, v, rel);
+        if (existsSync(p)) return p;
+      }
+    }
+  }
+  return '/usr/bin/google-chrome';
+}
 import path from 'node:path'; import { fileURLToPath } from 'node:url';
 const EXT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../extension');
 const server = await start();
+const PORT = server.address().port;
 const browser = await puppeteer.launch({
-  executablePath: process.env.CHROME_PATH || '/usr/bin/google-chrome', headless: true,
+  executablePath: findChrome(), headless: true,
   enableExtensions: [EXT],
   args: ['--no-sandbox', '--no-proxy-server', '--host-resolver-rules=MAP * 127.0.0.1', '--lang=vi'],
 });
@@ -16,7 +38,7 @@ const swTarget = await browser.waitForTarget(t => t.type() === 'service_worker' 
 const sw = await swTarget.worker();
 await new Promise(r => setTimeout(r, 1500));
 const page = await browser.newPage();
-await page.goto('http://news.test:8080/', { waitUntil: 'load' });
+await page.goto(`http://news.test:${PORT}/`, { waitUntil: 'load' });
 await new Promise(r => setTimeout(r, 800));
 const st = await page.evaluate(() => ({
   ad: !!window.adLoaded, own: !!window.ownLoaded,

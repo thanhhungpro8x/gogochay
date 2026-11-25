@@ -3,3 +3,5 @@ dist/
 test/e2e/tray.png
 safari/
 .DS_Store
+chrome/
+extension/_metadata/

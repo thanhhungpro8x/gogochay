@@ -38,12 +38,21 @@ The whole extension is ~360 lines of hand-written JavaScript: [`background.js`](
 1. Download `ad-tray-chrome.zip` from Releases (or build it, see below) and unzip it.
 2. Open `chrome://extensions`, turn on **Developer mode**, then click **Load unpacked** and pick the `extension` folder.
 
-### Safari (macOS, Xcode required)
-```bash
-./scripts/build-safari.sh
-open "safari/Ad Tray/Ad Tray.xcodeproj"   # Run the macOS scheme
-```
-Without a paid Apple Developer account: Safari › Settings › Advanced › *Show features for web developers*, then **Develop › Allow Unsigned Extensions** (this must be turned on again after each Safari restart). Then enable Ad Tray in Safari › Settings › Extensions. Requires Safari 17+.
+### Safari (macOS)
+
+**Without Xcode:** each push builds the Safari app on GitHub Actions.
+1. Open the repo's **Actions** tab, then the latest *build* run, and download the **ad-tray-safari** artifact.
+2. Unzip it, then:
+   ```bash
+   xattr -dr com.apple.quarantine "Ad Tray.app"   # it was downloaded, unsigned
+   mv "Ad Tray.app" /Applications/ && open "/Applications/Ad Tray.app"
+   ```
+3. Safari › Settings › Advanced › tick *Show features for web developers*, then Safari › Settings › **Developer** › tick **Allow unsigned extensions** (Safari turns this off again each time it restarts).
+4. Safari › Settings › **Extensions** › enable **Ad Tray** and set it to **Always Allow on Every Website**. Without this, Safari blocks requests but doesn't hide ads, and the tray stays empty.
+
+**With Xcode:** `./scripts/build-safari.sh`, then open `safari/Ad Tray/Ad Tray.xcodeproj` and Run the *Ad Tray* scheme. Same steps 3–4 apply.
+
+Requires Safari 17+. Safari has no side panel, so the tray opens as a popup only.
 
 ## Build & verify
 
