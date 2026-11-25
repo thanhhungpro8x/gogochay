@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ad Tray</title>
+  <link rel="stylesheet" href="tray.css">
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <img src="../icons/icon32.png" alt="" width="20" height="20">
+      <strong>Ad Tray</strong>
+    </div>
+    <label class="switch" data-i18n-title="toggleTitle">
+      <input type="checkbox" id="enabled">
+      <span class="slider"></span>
+    </label>
+  </header>
+
+  <div id="site" class="site"></div>
+
+  <section class="stats">
+    <div><span id="blocked" class="num">–</span><span data-i18n="statBlocked"></span></div>
+    <div><span id="hidden" class="num">–</span><span data-i18n="statHidden"></span></div>
+  </section>
+
+  <section class="toolbar">
+    <button id="showAll" data-i18n="showAll"></button>
+    <button id="hideAll" data-i18n="hideAll"></button>
+    <button id="refresh" data-i18n="refresh"></button>
+  </section>
+
+  <ul id="list" class="list"></ul>
+  <p id="empty" class="empty" hidden></p>
+
+  <footer>
+    <button id="openPanel" class="link" data-i18n="openPanel" hidden></button>
+    <span id="listsInfo" class="muted"></span>
+  </footer>
+
+  <script src="tray.js"></script>
+</body>
+</html>

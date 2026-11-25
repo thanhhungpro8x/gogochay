@@ -1,0 +1,52 @@
+{
+  "extName": {
+    "message": "Ad Tray — open-source ad blocker"
+  },
+  "extDescription": {
+    "message": "Blocks ads and collects hidden ones into a tray. Open source, no network access, no data collection."
+  },
+  "toggleTitle": {
+    "message": "Block ads on this site"
+  },
+  "statBlocked": {
+    "message": "requests blocked"
+  },
+  "statHidden": {
+    "message": "ads hidden on page"
+  },
+  "showAll": {
+    "message": "Show all"
+  },
+  "hideAll": {
+    "message": "Hide all"
+  },
+  "refresh": {
+    "message": "Refresh"
+  },
+  "show": {
+    "message": "Show"
+  },
+  "hide": {
+    "message": "Hide"
+  },
+  "openPanel": {
+    "message": "Open in side panel"
+  },
+  "unsupported": {
+    "message": "Ad Tray can't run on this page."
+  },
+  "pausedHere": {
+    "message": "Paused on this site. Switch on to block ads again."
+  },
+  "nothingHidden": {
+    "message": "No ad elements hidden on this page."
+  },
+  "listsInfo": {
+    "message": "EasyList of $DATE$",
+    "placeholders": {
+      "date": {
+        "content": "$1"
+      }
+    }
+  }
+}

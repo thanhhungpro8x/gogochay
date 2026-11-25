@@ -1,0 +1,40 @@
+name: build
+
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: "17 4 * * 1"   # weekly: check the pinned EasyList still converts cleanly
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci || npm install
+      - run: npm test
+      # Rebuild the bundled lists from the pinned commit and make sure the committed
+      # files match: anyone can check the shipped data really comes from EasyList.
+      - run: node scripts/build-lists.mjs
+      - run: git diff --exit-code -- extension/rules extension/data/cosmetic.js
+      - run: node scripts/verify.mjs
+      - name: Install Chrome for Testing
+        id: chrome
+        uses: browser-actions/setup-chrome@v1
+        with:
+          chrome-version: stable
+      - run: npm run test:e2e
+        env:
+          CHROME_PATH: ${{ steps.chrome.outputs.chrome-path }}
+      - run: mkdir -p dist && cd extension && zip -qr -X ../dist/ad-tray-chrome.zip . -x '.*'
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ad-tray-chrome
+          path: dist/ad-tray-chrome.zip

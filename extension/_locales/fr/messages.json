@@ -1,0 +1,52 @@
+{
+  "extName": {
+    "message": "Ad Tray — bloqueur de pub open source"
+  },
+  "extDescription": {
+    "message": "Bloque les publicités et range celles qui sont masquées dans un plateau. Open source, aucun accès réseau, aucune collecte de données."
+  },
+  "toggleTitle": {
+    "message": "Bloquer les pubs sur ce site"
+  },
+  "statBlocked": {
+    "message": "requêtes bloquées"
+  },
+  "statHidden": {
+    "message": "pubs masquées"
+  },
+  "showAll": {
+    "message": "Tout afficher"
+  },
+  "hideAll": {
+    "message": "Tout masquer"
+  },
+  "refresh": {
+    "message": "Actualiser"
+  },
+  "show": {
+    "message": "Afficher"
+  },
+  "hide": {
+    "message": "Masquer"
+  },
+  "openPanel": {
+    "message": "Ouvrir dans le panneau latéral"
+  },
+  "unsupported": {
+    "message": "Ad Tray ne peut pas fonctionner sur cette page."
+  },
+  "pausedHere": {
+    "message": "En pause sur ce site. Réactivez pour bloquer les pubs."
+  },
+  "nothingHidden": {
+    "message": "Aucune pub masquée sur cette page."
+  },
+  "listsInfo": {
+    "message": "EasyList du $DATE$",
+    "placeholders": {
+      "date": {
+        "content": "$1"
+      }
+    }
+  }
+}

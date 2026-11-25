@@ -1,0 +1,23 @@
+{
+  "name": "ad-tray",
+  "version": "0.1.0",
+  "description": "Open-source, privacy-first ad blocker for Chrome and Safari that collects hidden ads into a tray instead of throwing them away.",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "author": "Thanh-Hung DOAN",
+  "scripts": {
+    "test": "node --test test/*.test.mjs",
+    "build:lists": "node scripts/build-lists.mjs",
+    "update:lists": "node scripts/build-lists.mjs --latest",
+    "verify": "node scripts/verify.mjs",
+    "package": "node scripts/verify.mjs && cd extension && zip -qr -X ../dist/ad-tray-chrome.zip . -x '.*'",
+    "test:e2e": "node test/e2e/e2e.test.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "puppeteer-core": "^25.19.0"
+  }
+}

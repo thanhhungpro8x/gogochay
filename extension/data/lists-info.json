@@ -1,0 +1,48 @@
+{
+  "source": "https://github.com/easylist/easylist",
+  "commit": "9aac2b1feb3f47e22e2f173699c81c74534fb477",
+  "generatedAt": "2026-11-25T20:58:29.301Z",
+  "files": [
+    {
+      "file": "easylist/easylist_general_block.txt",
+      "sha256": "d48fc65c65f095e3f4b5855b15cc61347008d954c979c35976e647d3ad000411"
+    },
+    {
+      "file": "easylist/easylist_general_hide.txt",
+      "sha256": "265c42f7f8f93b50a27673a50f457f66c0bf68e3fb70728171270e1052339145"
+    },
+    {
+      "file": "easylist/easylist_adservers.txt",
+      "sha256": "0860e6404650fcb493186c86243ab70277a277e9e8ead52cebde7a97b63515d0"
+    },
+    {
+      "file": "easylist/easylist_thirdparty.txt",
+      "sha256": "5ef728eceb06e94506bc6f4455e2db0ca938f3a61ea9f9e33090711797725d75"
+    },
+    {
+      "file": "easylist/easylist_specific_block.txt",
+      "sha256": "e21debb2273a27278c1ed15f6cd0b6007efd34ee56d950b38daf66c1dfbeee74"
+    },
+    {
+      "file": "easylist/easylist_specific_hide.txt",
+      "sha256": "8d4a0d11a21d0e044c8699ba13095d5125d52d997c9ee9ce9d08c9b341552e43"
+    },
+    {
+      "file": "easylist/easylist_allowlist.txt",
+      "sha256": "2d1b55a19740fa573c56a370673db379444da1553579dfe12ca9777ef71ac75f"
+    },
+    {
+      "file": "easylist/easylist_allowlist_general_hide.txt",
+      "sha256": "9a562b47478f059b514e34d026dfe24b825cd041903944c2a188205f9e8f36f6"
+    }
+  ],
+  "stats": {
+    "lines": 71961,
+    "network": 48313,
+    "cosmetic": 22757,
+    "skipped": 891,
+    "dnrRules": 2694,
+    "genericSelectors": 13636,
+    "sitesWithSpecificSelectors": 6630
+  }
+}

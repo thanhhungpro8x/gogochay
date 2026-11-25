@@ -1,0 +1,52 @@
+{
+  "extName": {
+    "message": "Ad Tray — chặn quảng cáo mã nguồn mở"
+  },
+  "extDescription": {
+    "message": "Chặn quảng cáo và gom các quảng cáo bị ẩn vào một khay. Mã nguồn mở, không truy cập mạng, không thu thập dữ liệu."
+  },
+  "toggleTitle": {
+    "message": "Chặn quảng cáo trên trang này"
+  },
+  "statBlocked": {
+    "message": "request bị chặn"
+  },
+  "statHidden": {
+    "message": "quảng cáo bị ẩn"
+  },
+  "showAll": {
+    "message": "Hiện tất cả"
+  },
+  "hideAll": {
+    "message": "Ẩn tất cả"
+  },
+  "refresh": {
+    "message": "Làm mới"
+  },
+  "show": {
+    "message": "Hiện"
+  },
+  "hide": {
+    "message": "Ẩn"
+  },
+  "openPanel": {
+    "message": "Mở ở thanh bên"
+  },
+  "unsupported": {
+    "message": "Ad Tray không chạy được trên trang này."
+  },
+  "pausedHere": {
+    "message": "Đang tạm tắt trên trang này. Bật lại để chặn quảng cáo."
+  },
+  "nothingHidden": {
+    "message": "Không có quảng cáo nào bị ẩn trên trang này."
+  },
+  "listsInfo": {
+    "message": "EasyList ngày $DATE$",
+    "placeholders": {
+      "date": {
+        "content": "$1"
+      }
+    }
+  }
+}
