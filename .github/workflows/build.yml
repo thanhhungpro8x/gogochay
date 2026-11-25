@@ -63,6 +63,10 @@ jobs:
             --project-location safari --app-name "Ad Tray" \
             --bundle-identifier fr.thanhhungdoan.adtray \
             --swift --macos-only --copy-resources --no-open --no-prompt --force
+          # The converter derives the app's ID from its name (fr.thanhhungdoan.Ad-Tray);
+          # the extension's ID must start with the app's, so pin the app to fr.thanhhungdoan.adtray.
+          sed -i '' 's/PRODUCT_BUNDLE_IDENTIFIER = "fr.thanhhungdoan.Ad-Tray";/PRODUCT_BUNDLE_IDENTIFIER = fr.thanhhungdoan.adtray;/; s/PRODUCT_BUNDLE_IDENTIFIER = fr.thanhhungdoan.Ad-Tray;/PRODUCT_BUNDLE_IDENTIFIER = fr.thanhhungdoan.adtray;/' "safari/Ad Tray/Ad Tray.xcodeproj/project.pbxproj"
+          grep -n PRODUCT_BUNDLE_IDENTIFIER "safari/Ad Tray/Ad Tray.xcodeproj/project.pbxproj"
           xcodebuild -list -project "safari/Ad Tray/Ad Tray.xcodeproj"
       - name: Build (unsigned)
         run: |

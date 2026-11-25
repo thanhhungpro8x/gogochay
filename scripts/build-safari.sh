@@ -14,4 +14,7 @@ xcrun safari-web-extension-converter extension \
   --app-name "Ad Tray" \
   --bundle-identifier fr.thanhhungdoan.adtray \
   --swift --macos-only --copy-resources --no-open --no-prompt --force
+# The converter derives the app's ID from its name; the extension's ID must start with it.
+sed -i '' -E 's/PRODUCT_BUNDLE_IDENTIFIER = "?fr\.thanhhungdoan\.Ad-Tray"?;/PRODUCT_BUNDLE_IDENTIFIER = fr.thanhhungdoan.adtray;/' \
+  "safari/Ad Tray/Ad Tray.xcodeproj/project.pbxproj"
 echo "Done: open safari/Ad\ Tray/Ad\ Tray.xcodeproj"
