@@ -36,7 +36,18 @@ const browser = await puppeteer.launch({
 const ok = (c, m) => { console.log((c ? 'PASS ' : 'FAIL ') + m); if (!c) process.exitCode = 1; };
 const swTarget = await browser.waitForTarget(t => t.type() === 'service_worker' && t.url().endsWith('background.js'));
 const sw = await swTarget.worker();
-await new Promise(r => setTimeout(r, 1500));
+
+// Poll instead of fixed sleeps: CI machines are slower than a laptop.
+async function until(fn, what, timeout = 10000) {
+  const end = Date.now() + timeout;
+  for (;;) {
+    try { if (await fn()) return; } catch { /* not ready yet */ }
+    if (Date.now() > end) { console.log('TIMEOUT waiting for ' + what); return; }
+    await new Promise(r => setTimeout(r, 150));
+  }
+}
+const dynamicRules = () => sw.evaluate(() => chrome.declarativeNetRequest.getDynamicRules().then(r => r.length));
+await until(() => sw.evaluate(() => chrome.declarativeNetRequest.getEnabledRulesets().then(r => r.includes('easylist'))), 'static rules enabled');
 const page = await browser.newPage();
 await page.goto(`http://news.test:${PORT}/`, { waitUntil: 'load' });
 await new Promise(r => setTimeout(r, 800));
@@ -70,14 +81,15 @@ ok(shown.length === 1 && shown[0] !== 'none', 'Show brings one ad back: ' + show
 
 // pause site
 await sw.evaluate(() => chrome.storage.local.set({ paused: ['news.test'] }));
-await new Promise(r => setTimeout(r, 800));
+await until(async () => (await dynamicRules()) === 1, 'pause rule added');
 hits.length = 0;
-await page.reload({ waitUntil: 'load' }); await new Promise(r => setTimeout(r, 800));
+await page.reload({ waitUntil: 'load' });
+await until(() => page.evaluate(() => getComputedStyle(document.getElementById('AdBox2')).display !== 'none'), 'page unhidden when paused');
 const p2 = await page.evaluate(() => ({ ad: !!window.adLoaded, adbox: getComputedStyle(document.getElementById('AdBox2')).display }));
 ok(p2.ad && p2.adbox !== 'none', 'paused site: nothing blocked or hidden');
 await sw.evaluate(() => chrome.storage.local.set({ paused: [] }));
-await new Promise(r => setTimeout(r, 800));
-await page.reload({ waitUntil: 'load' }); await new Promise(r => setTimeout(r, 500));
+await until(async () => (await dynamicRules()) === 0, 'pause rule removed');
+await page.reload({ waitUntil: 'load' });
 ok(!(await page.evaluate(() => !!window.adLoaded)), 'resumed: blocking back on');
 
 // real-world-ish performance: time to insert all generic rules

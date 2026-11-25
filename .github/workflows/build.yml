@@ -31,6 +31,7 @@ jobs:
         with:
           chrome-version: stable
       - run: npm run test:e2e
+        timeout-minutes: 5
         env:
           CHROME_PATH: ${{ steps.chrome.outputs.chrome-path }}
       - run: mkdir -p dist && cd extension && zip -qr -X ../dist/ad-tray-chrome.zip . -x '.*'
@@ -44,7 +45,6 @@ jobs:
   # fine for testing with Safari's "Allow unsigned extensions", not for the App Store.
   safari:
     runs-on: macos-latest
-    needs: build
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
