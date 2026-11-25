@@ -78,17 +78,17 @@ jobs:
               grep -E "error:|fatal" xcodebuild.log | sort -u | head -15 | while IFS= read -r l; do echo "::error::$l"; done
               exit 1
             }
-      - name: Sign ad-hoc with the generated entitlements
+      - name: Sign ad-hoc (entitlements in safari-config/)
         run: |
           set -euo pipefail
           APP="build/Build/Products/Release/Ad Tray.app"
           EXT="$(find "$APP/Contents/PlugIns" -maxdepth 1 -name '*.appex' | head -1)"
-          EXT_ENT="$(find safari -name '*.entitlements' -path '*Extension*' | head -1)"
-          APP_ENT="$(find safari -name '*.entitlements' ! -path '*Extension*' | head -1)"
-          echo "appex=$EXT ext_ent=$EXT_ENT app_ent=$APP_ENT"
-          codesign --force --sign - --entitlements "$EXT_ENT" "$EXT"
-          codesign --force --sign - --entitlements "$APP_ENT" "$APP"
+          test -n "$EXT" || { echo "::error::No .appex found in $APP/Contents/PlugIns"; exit 1; }
+          # inside-out: the extension first, then the app that contains it
+          codesign --force --sign - --entitlements safari-config/extension.entitlements "$EXT"
+          codesign --force --sign - --entitlements safari-config/app.entitlements "$APP"
           codesign --verify --deep --strict --verbose=2 "$APP"
+          codesign -d --entitlements - "$EXT"
       - name: Zip the app
         run: |
           mkdir -p dist
