@@ -14,16 +14,22 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
           node-version: 22
-      - run: npm ci || npm install
+      - run: npm ci
       - run: npm test
       # Rebuild the bundled lists from the pinned commit and make sure the committed
       # files match: anyone can check the shipped data really comes from EasyList.
       - run: node scripts/build-lists.mjs
-      - run: git diff --exit-code -- extension/rules extension/data/cosmetic.js
+      - name: Bundled lists match the pinned EasyList commit
+        run: |
+          if ! git diff --quiet -- extension/rules extension/data/cosmetic.js; then
+            echo "::error::Bundled lists differ from a fresh build. Run 'npm run build:lists' and commit."
+            git diff --stat -- extension/rules extension/data/cosmetic.js
+            exit 1
+          fi
       - run: node scripts/verify.mjs
       - name: Install Chrome for Testing
         id: chrome
@@ -35,19 +41,19 @@ jobs:
         env:
           CHROME_PATH: ${{ steps.chrome.outputs.chrome-path }}
       - run: mkdir -p dist && cd extension && zip -qr -X ../dist/ad-tray-chrome.zip . -x '.*'
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         with:
           name: ad-tray-chrome
           path: dist/ad-tray-chrome.zip
 
   # Builds the Safari version on GitHub's macOS machines (they have Xcode), so you
-  # don't need Xcode locally. The app is ad-hoc signed ("Sign to Run Locally"):
-  # fine for testing with Safari's "Allow unsigned extensions", not for the App Store.
+  # don't need Xcode locally. Ad-hoc signed ("Sign to Run Locally"): fine for testing
+  # with Safari's "Allow unsigned extensions", not for the App Store.
   safari:
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
           node-version: 22
       - run: node scripts/verify.mjs
@@ -57,17 +63,33 @@ jobs:
             --project-location safari --app-name "Ad Tray" \
             --bundle-identifier fr.thanhhungdoan.adtray \
             --swift --macos-only --copy-resources --no-open --no-prompt --force
-      - name: Build (ad-hoc signed)
+          xcodebuild -list -project "safari/Ad Tray/Ad Tray.xcodeproj"
+      - name: Build (unsigned)
         run: |
+          set -o pipefail
           xcodebuild -project "safari/Ad Tray/Ad Tray.xcodeproj" -scheme "Ad Tray" \
             -configuration Release -derivedDataPath build \
-            CODE_SIGN_IDENTITY="-" CODE_SIGN_STYLE=Manual DEVELOPMENT_TEAM="" \
-            build
+            CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" \
+            build 2>&1 | tee xcodebuild.log || {
+              grep -E "error:|fatal" xcodebuild.log | sort -u | head -15 | while IFS= read -r l; do echo "::error::$l"; done
+              exit 1
+            }
+      - name: Sign ad-hoc with the generated entitlements
+        run: |
+          set -euo pipefail
+          APP="build/Build/Products/Release/Ad Tray.app"
+          EXT="$(find "$APP/Contents/PlugIns" -maxdepth 1 -name '*.appex' | head -1)"
+          EXT_ENT="$(find safari -name '*.entitlements' -path '*Extension*' | head -1)"
+          APP_ENT="$(find safari -name '*.entitlements' ! -path '*Extension*' | head -1)"
+          echo "appex=$EXT ext_ent=$EXT_ENT app_ent=$APP_ENT"
+          codesign --force --sign - --entitlements "$EXT_ENT" "$EXT"
+          codesign --force --sign - --entitlements "$APP_ENT" "$APP"
+          codesign --verify --deep --strict --verbose=2 "$APP"
       - name: Zip the app
         run: |
           mkdir -p dist
           ditto -c -k --keepParent "build/Build/Products/Release/Ad Tray.app" dist/ad-tray-safari.zip
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         with:
           name: ad-tray-safari
           path: dist/ad-tray-safari.zip

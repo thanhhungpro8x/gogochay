@@ -33,7 +33,20 @@ const browser = await puppeteer.launch({
   enableExtensions: [EXT],
   args: ['--no-sandbox', '--no-proxy-server', '--host-resolver-rules=MAP * 127.0.0.1', '--lang=vi'],
 });
-const ok = (c, m) => { console.log((c ? 'PASS ' : 'FAIL ') + m); if (!c) process.exitCode = 1; };
+const ok = (c, m) => {
+  console.log((c ? 'PASS ' : 'FAIL ') + m);
+  if (!c) {
+    process.exitCode = 1;
+    if (process.env.GITHUB_ACTIONS) console.log(`::error::e2e FAIL ${m}`); // shows in the run summary
+  }
+};
+for (const ev of ['unhandledRejection', 'uncaughtException']) {
+  process.on(ev, (e) => {
+    console.error(e);
+    if (process.env.GITHUB_ACTIONS) console.log(`::error::e2e crashed: ${String(e?.message ?? e).split('\n')[0]}`);
+    process.exit(1);
+  });
+}
 const swTarget = await browser.waitForTarget(t => t.type() === 'service_worker' && t.url().endsWith('background.js'));
 const sw = await swTarget.worker();
 
@@ -42,7 +55,7 @@ async function until(fn, what, timeout = 10000) {
   const end = Date.now() + timeout;
   for (;;) {
     try { if (await fn()) return; } catch { /* not ready yet */ }
-    if (Date.now() > end) { console.log('TIMEOUT waiting for ' + what); return; }
+    if (Date.now() > end) { console.log((process.env.GITHUB_ACTIONS ? '::warning::' : '') + 'TIMEOUT waiting for ' + what); return; }
     await new Promise(r => setTimeout(r, 150));
   }
 }
