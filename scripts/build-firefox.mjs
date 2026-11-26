@@ -43,12 +43,14 @@ m.sidebar_action = {
 m.browser_specific_settings = {
   gecko: {
     id: 'gogochay@thanhhungdoan.fr',
-    strict_min_version: '128.0',
+    // 140: first Firefox that understands data_collection_permissions (required by AMO)
+    strict_min_version: '140.0',
     data_collection_permissions: { required: ['none'] },
   },
   // Firefox for Android: same add-on (the sidebar simply isn't offered there)
   gecko_android: {
-    strict_min_version: '128.0',
+    // 142: first Firefox for Android that understands data_collection_permissions
+    strict_min_version: '142.0',
   },
 };
 

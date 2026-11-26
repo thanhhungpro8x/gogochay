@@ -82,7 +82,7 @@ The hand-written code is [`background.js`](extension/background.js), [`content.j
 1. Download `gogochay-chrome.zip` from Releases (or build it, see below) and unzip it.
 2. Open `chrome://extensions`, turn on **Developer mode**, then click **Load unpacked** and pick the `extension` folder.
 
-### Firefox (128+)
+### Firefox (140+, Android 142+)
 
 ```bash
 npm run build:firefox        # → dist/firefox/ and dist/gogochay-firefox.zip
