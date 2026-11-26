@@ -1,48 +1,99 @@
 {
-  "source": "https://github.com/easylist/easylist",
-  "commit": "9aac2b1feb3f47e22e2f173699c81c74534fb477",
-  "generatedAt": "2026-11-25T20:58:29.301Z",
-  "files": [
+  "generatedAt": "2026-11-25T23:50:37.651Z",
+  "lists": [
     {
-      "file": "easylist/easylist_general_block.txt",
-      "sha256": "d48fc65c65f095e3f4b5855b15cc61347008d954c979c35976e647d3ad000411"
+      "id": "easylist",
+      "name": "EasyList",
+      "license": "GPLv3 / CC BY-SA 3.0",
+      "source": "https://github.com/easylist/easylist",
+      "commit": "9aac2b1feb3f47e22e2f173699c81c74534fb477",
+      "files": [
+        {
+          "file": "easylist/easylist_general_block.txt",
+          "sha256": "d48fc65c65f095e3f4b5855b15cc61347008d954c979c35976e647d3ad000411"
+        },
+        {
+          "file": "easylist/easylist_general_hide.txt",
+          "sha256": "265c42f7f8f93b50a27673a50f457f66c0bf68e3fb70728171270e1052339145"
+        },
+        {
+          "file": "easylist/easylist_adservers.txt",
+          "sha256": "0860e6404650fcb493186c86243ab70277a277e9e8ead52cebde7a97b63515d0"
+        },
+        {
+          "file": "easylist/easylist_thirdparty.txt",
+          "sha256": "5ef728eceb06e94506bc6f4455e2db0ca938f3a61ea9f9e33090711797725d75"
+        },
+        {
+          "file": "easylist/easylist_specific_block.txt",
+          "sha256": "e21debb2273a27278c1ed15f6cd0b6007efd34ee56d950b38daf66c1dfbeee74"
+        },
+        {
+          "file": "easylist/easylist_specific_hide.txt",
+          "sha256": "8d4a0d11a21d0e044c8699ba13095d5125d52d997c9ee9ce9d08c9b341552e43"
+        },
+        {
+          "file": "easylist/easylist_allowlist.txt",
+          "sha256": "2d1b55a19740fa573c56a370673db379444da1553579dfe12ca9777ef71ac75f"
+        },
+        {
+          "file": "easylist/easylist_allowlist_general_hide.txt",
+          "sha256": "9a562b47478f059b514e34d026dfe24b825cd041903944c2a188205f9e8f36f6"
+        }
+      ],
+      "stats": {
+        "lines": 71961,
+        "network": 48313,
+        "cosmetic": 22757,
+        "skipped": 891,
+        "dnrRules": 2694,
+        "genericSelectors": 13636,
+        "sitesWithSpecificSelectors": 6630
+      }
     },
     {
-      "file": "easylist/easylist_general_hide.txt",
-      "sha256": "265c42f7f8f93b50a27673a50f457f66c0bf68e3fb70728171270e1052339145"
+      "id": "liste_fr",
+      "name": "Liste FR (French sites)",
+      "license": "CC BY-SA 3.0",
+      "source": "https://github.com/easylist/listefr",
+      "commit": "2919802d20c98f73139c6767ff7dede947c87faf",
+      "files": [
+        {
+          "file": "liste_fr.txt",
+          "sha256": "fba9e237a6cda4de55ab7cea3e8d843a32997d18c744fda11b5e275bffdb51f1"
+        }
+      ],
+      "stats": {
+        "lines": 14400,
+        "network": 10087,
+        "cosmetic": 3458,
+        "skipped": 855,
+        "dnrRules": 3631,
+        "genericSelectors": 1788,
+        "sitesWithSpecificSelectors": 1288
+      }
     },
     {
-      "file": "easylist/easylist_adservers.txt",
-      "sha256": "0860e6404650fcb493186c86243ab70277a277e9e8ead52cebde7a97b63515d0"
-    },
-    {
-      "file": "easylist/easylist_thirdparty.txt",
-      "sha256": "5ef728eceb06e94506bc6f4455e2db0ca938f3a61ea9f9e33090711797725d75"
-    },
-    {
-      "file": "easylist/easylist_specific_block.txt",
-      "sha256": "e21debb2273a27278c1ed15f6cd0b6007efd34ee56d950b38daf66c1dfbeee74"
-    },
-    {
-      "file": "easylist/easylist_specific_hide.txt",
-      "sha256": "8d4a0d11a21d0e044c8699ba13095d5125d52d997c9ee9ce9d08c9b341552e43"
-    },
-    {
-      "file": "easylist/easylist_allowlist.txt",
-      "sha256": "2d1b55a19740fa573c56a370673db379444da1553579dfe12ca9777ef71ac75f"
-    },
-    {
-      "file": "easylist/easylist_allowlist_general_hide.txt",
-      "sha256": "9a562b47478f059b514e34d026dfe24b825cd041903944c2a188205f9e8f36f6"
+      "id": "abpvn",
+      "name": "ABPVN (Vietnamese sites)",
+      "license": "GPLv3",
+      "source": "https://github.com/abpvn/abpvn",
+      "commit": "d8e5caa323905f869c266d9fd4bb0d809dc93fbe",
+      "files": [
+        {
+          "file": "filter/abpvn.txt",
+          "sha256": "d42d896068a714e90eaf31608d3652c7e5e125dd23711de21d8f5b5eab7861ff"
+        }
+      ],
+      "stats": {
+        "lines": 1100,
+        "network": 399,
+        "cosmetic": 681,
+        "skipped": 20,
+        "dnrRules": 303,
+        "genericSelectors": 24,
+        "sitesWithSpecificSelectors": 336
+      }
     }
-  ],
-  "stats": {
-    "lines": 71961,
-    "network": 48313,
-    "cosmetic": 22757,
-    "skipped": 891,
-    "dnrRules": 2694,
-    "genericSelectors": 13636,
-    "sitesWithSpecificSelectors": 6630
-  }
+  ]
 }

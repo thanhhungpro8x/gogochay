@@ -1,6 +1,6 @@
 {
-  "name": "ad-tray",
-  "version": "0.1.0",
+  "name": "gogochay",
+  "version": "1.0.0",
   "description": "Open-source, privacy-first ad blocker for Chrome and Safari that collects hidden ads into a tray instead of throwing them away.",
   "private": true,
   "type": "module",
@@ -11,13 +11,16 @@
     "build:lists": "node scripts/build-lists.mjs",
     "update:lists": "node scripts/build-lists.mjs --latest",
     "verify": "node scripts/verify.mjs",
-    "package": "node scripts/verify.mjs && cd extension && zip -qr -X ../dist/ad-tray-chrome.zip . -x '.*'",
-    "test:e2e": "node test/e2e/e2e.test.mjs"
+    "package": "node scripts/verify.mjs && cd extension && zip -qr -X ../dist/gogochay-chrome.zip . -x '.*'",
+    "test:e2e": "node test/e2e/e2e.test.mjs",
+    "build:firefox": "node scripts/build-firefox.mjs",
+    "lint:firefox": "node scripts/build-firefox.mjs && web-ext lint --source-dir dist/firefox --self-hosted"
   },
   "engines": {
     "node": ">=20"
   },
   "devDependencies": {
-    "puppeteer-core": "^25.19.0"
+    "puppeteer-core": "^25.19.0",
+    "web-ext": "^8.0.0"
   }
 }

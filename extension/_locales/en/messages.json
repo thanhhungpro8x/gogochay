@@ -1,9 +1,9 @@
 {
   "extName": {
-    "message": "Ad Tray — open-source ad blocker"
+    "message": "GoGoChay – ad blocker & fake-site alert"
   },
   "extDescription": {
-    "message": "Blocks ads and collects hidden ones into a tray. Open source, no network access, no data collection."
+    "message": "Blocks ads, collects hidden ones into a tray, and warns you about fake web addresses. Open source, no data collection."
   },
   "toggleTitle": {
     "message": "Block ads on this site"
@@ -33,7 +33,7 @@
     "message": "Open in side panel"
   },
   "unsupported": {
-    "message": "Ad Tray can't run on this page."
+    "message": "GoGoChay can't run on this page."
   },
   "pausedHere": {
     "message": "Paused on this site. Switch on to block ads again."
@@ -42,7 +42,7 @@
     "message": "No ad elements hidden on this page."
   },
   "listsInfo": {
-    "message": "EasyList of $DATE$",
+    "message": "Lists of $DATE$",
     "placeholders": {
       "date": {
         "content": "$1"
@@ -54,5 +54,235 @@
   },
   "langAuto": {
     "message": "Browser language"
+  },
+  "pickElement": {
+    "message": "Hide an element…"
+  },
+  "pickHint": {
+    "message": "Click or tap what you want to hide"
+  },
+  "customCount": {
+    "message": "$COUNT$ hidden by you",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "clearCustom": {
+    "message": "Undo"
+  },
+  "aggressive": {
+    "message": "Aggressive blocking (experimental)"
+  },
+  "aggressiveHere": {
+    "message": "…on this site"
+  },
+  "aggressiveHint": {
+    "message": "Also hides boxes that look like ads (ad-slot IDs, “Advertisement” labels). It may hide something by mistake: if so, untick “on this site”."
+  },
+  "spoofTitle": {
+    "message": "⚠ This web address may be fake"
+  },
+  "spoofTitleBrand": {
+    "message": "⚠ This site may be pretending to be “$BRAND$”",
+    "placeholders": {
+      "brand": {
+        "content": "$1"
+      }
+    }
+  },
+  "spoofTitleWarn": {
+    "message": "⚠ This web address may be misleading"
+  },
+  "spoofMixed": {
+    "message": "mixes letters from different alphabets ($SCRIPTS$). The highlighted letters only look like normal letters.",
+    "placeholders": {
+      "scripts": {
+        "content": "$1"
+      }
+    }
+  },
+  "spoofWhole": {
+    "message": "is written in $SCRIPT$ letters that look like “$LOOKS$”.",
+    "placeholders": {
+      "script": {
+        "content": "$1"
+      },
+      "looks": {
+        "content": "$2"
+      }
+    }
+  },
+  "spoofLookalike": {
+    "message": "looks like “$BRAND$” but is a different name.",
+    "placeholders": {
+      "brand": {
+        "content": "$1"
+      }
+    }
+  },
+  "spoofSubdomain": {
+    "message": "The address starts with “$PREFIX$”, but the site you are really on is “$REAL$”.",
+    "placeholders": {
+      "prefix": {
+        "content": "$1"
+      },
+      "real": {
+        "content": "$2"
+      }
+    }
+  },
+  "spoofRealAddress": {
+    "message": "The site you are actually on is:"
+  },
+  "spoofLeave": {
+    "message": "Leave this site"
+  },
+  "spoofTrust": {
+    "message": "I know this site, continue"
+  },
+  "domainCheck": {
+    "message": "Warn about fake web addresses"
+  },
+  "domainOk": {
+    "message": "No suspicious characters in the address"
+  },
+  "domainBad": {
+    "message": "⚠ Suspicious web address"
+  },
+  "domainTrusted": {
+    "message": "You marked this address as trusted"
+  },
+  "pickParent": {
+    "message": "↑ Bigger"
+  },
+  "pickHide": {
+    "message": "✓ Hide"
+  },
+  "pickCancel": {
+    "message": "✕ Cancel"
+  },
+  "spoofRare": {
+    "message": "uses rare letters that only look like normal ones: it reads as “$LOOKS$”.",
+    "placeholders": {
+      "looks": {
+        "content": "$1"
+      }
+    }
+  },
+  "loginTitle": {
+    "message": "⚠ Check the address before typing your password"
+  },
+  "loginSpecial": {
+    "message": "contains characters outside a–z (highlighted). Make sure this really is the site you meant to open."
+  },
+  "domainSpecial": {
+    "message": "ℹ Address has characters outside a–z: $CHARS$",
+    "placeholders": {
+      "chars": {
+        "content": "$1"
+      }
+    }
+  },
+  "w_title": {
+    "message": "GoGoChay is installed"
+  },
+  "w_intro": {
+    "message": "An ad blocker that shows you what it hid, and warns you when a web address is pretending to be another site. Everything runs on your device."
+  },
+  "w_start": {
+    "message": "Get started"
+  },
+  "w_step_pin": {
+    "message": "Pin the GoGoChay icon to the toolbar (puzzle-piece menu → pin), so the tray is one click away."
+  },
+  "w_step_perm": {
+    "message": "Safari, Firefox and phones: allow GoGoChay on all websites (Safari: Settings › Extensions › \"Always Allow on Every Website\"; Firefox: about:addons › GoGoChay › Permissions). Without it, ads are blocked but ad boxes stay visible."
+  },
+  "w_step_tray": {
+    "message": "On any page, click the icon to open the tray: see what was hidden, hide more, or pause GoGoChay for that site."
+  },
+  "w_ads_title": {
+    "message": "Ad blocking"
+  },
+  "w_ads_1": {
+    "message": "Blocks ad requests with EasyList, Liste FR (French sites) and ABPVN (Vietnamese sites). The browser does the blocking, so GoGoChay never sees your traffic."
+  },
+  "w_ads_2": {
+    "message": "Hides banners, “Sponsored” blocks and empty ad placeholders as the page loads."
+  },
+  "w_ads_3": {
+    "message": "Aggressive blocking (off by default) also hides boxes that look like ads on sites no list covers, e.g. empty boxes labelled “Advertisement”. Can be turned off per site."
+  },
+  "w_tray_title": {
+    "message": "The tray"
+  },
+  "w_tray_1": {
+    "message": "Lists every ad hidden on the page: where it comes from, its size, its text."
+  },
+  "w_tray_2": {
+    "message": "Show an ad again (or all of them) if hiding it broke the page."
+  },
+  "w_tray_3": {
+    "message": "“Hide an element…”: click or tap anything the lists missed. It stays hidden on that site; “Undo” removes it."
+  },
+  "w_tray_4": {
+    "message": "Pause GoGoChay on a site, switch the language, open it in the side panel (Chrome) or sidebar (Firefox)."
+  },
+  "w_fake_title": {
+    "message": "Fake web address warnings"
+  },
+  "w_fake_intro": {
+    "message": "GoGoChay checks the address of the page you actually land on, even after a redirect from Facebook, an e-mail or a chat, and warns you if it is made to look like another site."
+  },
+  "w_fake_red_t": {
+    "message": "🔴 Red bar: almost certainly fake"
+  },
+  "w_fake_red": {
+    "message": "The name mixes alphabets, uses rare letters that only look like a–z, or imitates a well-known site (banks, PayPal, Google, Ameli, Vietcombank…)."
+  },
+  "w_fake_yellow_t": {
+    "message": "🟡 Yellow note: check before you log in"
+  },
+  "w_fake_yellow": {
+    "message": "The name has characters outside a–z (often harmless accents). GoGoChay only reminds you when you click into a password or card-number field."
+  },
+  "w_fake_note": {
+    "message": "The warning highlights the fake letters and tells you the name of the site you are actually on, with “Leave this site” and “I know this site” buttons. It catches lookalike names; for brand-new scam sites, keep your browser’s own phishing protection on."
+  },
+  "w_priv_title": {
+    "message": "Privacy"
+  },
+  "w_priv_1": {
+    "message": "No data leaves your device: no network requests, no analytics, no remote updates."
+  },
+  "w_priv_2": {
+    "message": "Only your own settings are stored, locally: paused sites, elements you hid, language, trusted sites."
+  },
+  "w_priv_3": {
+    "message": "Open source (MIT). The filter lists are rebuilt from public sources in CI and can be checked by anyone."
+  },
+  "w_source": {
+    "message": "Source code on GitHub"
+  },
+  "w_privacy": {
+    "message": "Privacy policy"
+  },
+  "aboutLink": {
+    "message": "Features"
+  },
+  "langCode": {
+    "message": "en",
+    "description": "Do not translate: language code of this file"
+  },
+  "spoofDisclaimer": {
+    "message": "Automatic warning based on suspicious characters in the address. It may be wrong: it does not prove the site is fraudulent, and no warning does not mean a site is safe."
+  },
+  "w_disclaimer": {
+    "message": "Warnings are automatic: they look only at the characters of the address and its resemblance to well-known names, not at the page itself. They can be wrong in both directions: a warning does not prove a site is fraudulent, and no warning does not mean a site is safe. Brand names are used only for comparison; GoGoChay is not affiliated with them."
+  },
+  "w_tagline": {
+    "message": "Ads tucked away. Fakes called out."
   }
 }

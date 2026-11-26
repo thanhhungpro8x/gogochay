@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GoGoChay</title>
+  <link rel="stylesheet" href="welcome.css">
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <img src="../icons/icon128.png" alt="" width="56" height="56">
+      <div>
+        <h1 data-i18n="w_title"></h1>
+        <p class="tagline" data-i18n="w_tagline"></p>
+        <p class="lead" data-i18n="w_intro"></p>
+      </div>
+    </div>
+    <select id="lang" data-i18n-title="language">
+      <option value="auto" data-i18n="langAuto"></option>
+      <option value="en">English</option>
+      <option value="vi">Tiếng Việt</option>
+      <option value="fr">Français</option>
+    </select>
+  </header>
+
+  <section class="start">
+    <h2 data-i18n="w_start"></h2>
+    <ol>
+      <li data-i18n="w_step_pin"></li>
+      <li data-i18n="w_step_perm"></li>
+      <li data-i18n="w_step_tray"></li>
+    </ol>
+  </section>
+
+  <div class="grid">
+    <section class="card">
+      <h2>🚫 <span data-i18n="w_ads_title"></span></h2>
+      <ul>
+        <li data-i18n="w_ads_1"></li>
+        <li data-i18n="w_ads_2"></li>
+        <li data-i18n="w_ads_3"></li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>🗂 <span data-i18n="w_tray_title"></span></h2>
+      <ul>
+        <li data-i18n="w_tray_1"></li>
+        <li data-i18n="w_tray_2"></li>
+        <li data-i18n="w_tray_3"></li>
+        <li data-i18n="w_tray_4"></li>
+      </ul>
+    </section>
+
+    <section class="card wide">
+      <h2>🛡 <span data-i18n="w_fake_title"></span></h2>
+      <p data-i18n="w_fake_intro"></p>
+      <div class="levels">
+        <div class="level red">
+          <strong data-i18n="w_fake_red_t"></strong>
+          <p data-i18n="w_fake_red"></p>
+          <p class="ex"><code>pаypal.com</code> <code>ɑpple-support.com</code> <code>paypa1.com</code> <code>vietcómbank.com</code></p>
+        </div>
+        <div class="level yellow">
+          <strong data-i18n="w_fake_yellow_t"></strong>
+          <p data-i18n="w_fake_yellow"></p>
+          <p class="ex"><code>vietcómbank-online.com</code> <code>paypal.com.secure-login.xyz</code></p>
+        </div>
+      </div>
+      <p class="muted" data-i18n="w_fake_note"></p>
+      <p class="disclaimer" data-i18n="w_disclaimer"></p>
+    </section>
+
+    <section class="card wide">
+      <h2>🔒 <span data-i18n="w_priv_title"></span></h2>
+      <ul>
+        <li data-i18n="w_priv_1"></li>
+        <li data-i18n="w_priv_2"></li>
+        <li data-i18n="w_priv_3"></li>
+      </ul>
+    </section>
+  </div>
+
+  <footer>
+    <a id="source" href="https://github.com/thanhhungpro8x/gogochay" target="_blank" rel="noopener noreferrer" data-i18n="w_source"></a>
+    <a href="https://github.com/thanhhungpro8x/gogochay/blob/main/PRIVACY.md" target="_blank" rel="noopener noreferrer" data-i18n="w_privacy"></a>
+    <span id="version" class="muted"></span>
+  </footer>
+
+  <script src="../lang.js"></script>
+
+  <script type="module" src="welcome.js"></script>
+</body>
+</html>

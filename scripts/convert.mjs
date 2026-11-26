@@ -224,3 +224,20 @@ export function convertLists(text) {
     stats: { ...stats, dnrRules: rules.length },
   };
 }
+
+/** Merge the cosmetic output of several lists (exceptions apply across lists at runtime). */
+export function mergeCosmetic(list) {
+  const set = (arrs) => [...new Set(arrs.flat())].sort();
+  const map = (objs) => {
+    const out = {};
+    for (const o of objs) for (const [k, v] of Object.entries(o)) (out[k] ??= new Set()) && v.forEach((s) => out[k].add(s));
+    return Object.fromEntries(Object.keys(out).sort().map((k) => [k, [...out[k]].sort()]));
+  };
+  return {
+    generic: set(list.map((c) => c.generic)),
+    specific: map(list.map((c) => c.specific)),
+    exceptions: map(list.map((c) => c.exceptions)),
+    genericHide: set(list.map((c) => c.genericHide)),
+    elemHide: set(list.map((c) => c.elemHide)),
+  };
+}

@@ -56,13 +56,18 @@ const body = cosmetic.split('\n').filter((l) => l && !l.startsWith('//'));
 if (body.length !== 1 || !/^self\.AD_TRAY_COSMETIC = \{.*\};$/.test(body[0])) fail('data/cosmetic.js must be a single data assignment');
 JSON.parse(body[0].replace(/^self\.AD_TRAY_COSMETIC = /, '').replace(/;$/, ''));
 
-const rules = JSON.parse(await readFile(path.join(root, 'rules', 'easylist.json'), 'utf8'));
-for (const r of rules) {
-  if (!['block', 'allow', 'allowAllRequests'].includes(r.action.type)) fail(`rule ${r.id}: action ${r.action.type} not allowed`);
+let ruleCount = 0;
+for (const res of manifest.declarative_net_request.rule_resources) {
+  const rules = JSON.parse(await readFile(path.join(root, res.path), 'utf8'));
+  ruleCount += rules.length;
+  for (const r of rules) {
+    if (!['block', 'allow', 'allowAllRequests'].includes(r.action.type)) fail(`${res.id} rule ${r.id}: action ${r.action.type} not allowed`);
+  }
 }
+if (ruleCount > 30000) fail(`${ruleCount} static rules: above Chrome's guaranteed 30,000`);
 
 if (errors.length) {
   console.error('verify FAILED:\n  ' + errors.join('\n  '));
   process.exit(1);
 }
-console.log(`verify OK — ${rules.length} network rules, permissions: ${manifest.permissions.join(', ')}`);
+console.log(`verify OK — ${ruleCount} network rules, permissions: ${manifest.permissions.join(', ')}`);

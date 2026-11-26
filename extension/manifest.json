@@ -1,12 +1,12 @@
 {
   "manifest_version": 3,
   "name": "__MSG_extName__",
-  "short_name": "Ad Tray",
+  "short_name": "GoGoChay",
   "description": "__MSG_extDescription__",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "default_locale": "en",
   "author": "Thanh-Hung DOAN",
-  "homepage_url": "https://github.com/thanhhungpro8x/ad-tray",
+  "homepage_url": "https://github.com/thanhhungpro8x/gogochay",
   "minimum_chrome_version": "116",
   "icons": {
     "16": "icons/icon16.png",
@@ -14,12 +14,17 @@
     "48": "icons/icon48.png",
     "128": "icons/icon128.png"
   },
-  "permissions": ["declarativeNetRequest", "storage", "sidePanel", "activeTab"],
+  "permissions": [
+    "declarativeNetRequest",
+    "storage",
+    "sidePanel",
+    "activeTab"
+  ],
   "background": {
     "service_worker": "background.js"
   },
   "action": {
-    "default_title": "Ad Tray",
+    "default_title": "GoGoChay",
     "default_popup": "tray/tray.html",
     "default_icon": {
       "16": "icons/icon16.png",
@@ -31,13 +36,35 @@
   },
   "declarative_net_request": {
     "rule_resources": [
-      { "id": "easylist", "enabled": true, "path": "rules/easylist.json" }
+      {
+        "id": "easylist",
+        "enabled": true,
+        "path": "rules/easylist.json"
+      },
+      {
+        "id": "liste_fr",
+        "enabled": true,
+        "path": "rules/liste_fr.json"
+      },
+      {
+        "id": "abpvn",
+        "enabled": true,
+        "path": "rules/abpvn.json"
+      }
     ]
   },
   "content_scripts": [
     {
-      "matches": ["http://*/*", "https://*/*"],
-      "js": ["data/cosmetic.js", "content.js"],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "data/cosmetic.js",
+        "lang.js",
+        "domain-check.js",
+        "content.js"
+      ],
       "run_at": "document_start",
       "all_frames": true
     }

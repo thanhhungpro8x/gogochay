@@ -1,4 +1,4 @@
-// Ad Tray — background service worker.
+// GoGoChay — background service worker.
 // Responsibilities (and nothing else):
 //   * show the number of blocked requests on the toolbar badge (computed by the browser)
 //   * turn the user's "paused sites" list into allow rules
@@ -27,13 +27,28 @@ async function init() {
     // Not supported in every browser (e.g. some Safari versions) — badge is optional.
   }
   try {
-    await chrome.action.setBadgeBackgroundColor({ color: '#5b5bd6' });
+    await chrome.action.setBadgeBackgroundColor({ color: '#1b7f4a' });
   } catch { /* optional */ }
   await syncPausedSites();
 }
 
-chrome.runtime.onInstalled.addListener(init);
+chrome.runtime.onInstalled.addListener(async ({ reason }) => {
+  await init();
+  // first install only: show what GoGoChay does (a local page, nothing is downloaded)
+  if (reason === 'install') chrome.tabs.create({ url: chrome.runtime.getURL('welcome/welcome.html') });
+});
 chrome.runtime.onStartup.addListener(init);
 chrome.storage.onChanged.addListener((changes, area) => {
   if (area === 'local' && changes.paused) syncPausedSites();
+});
+
+// The in-page warning asks for its strings in the chosen language. Only our own
+// content scripts can send this; only our own locale files are returned.
+chrome.runtime.onMessage.addListener((msg, sender, reply) => {
+  if (msg?.type !== 'adtray:messages' || sender.id !== chrome.runtime.id) return false;
+  if (!['en', 'vi', 'fr'].includes(msg.lang)) { reply(null); return false; }
+  fetch(chrome.runtime.getURL(`_locales/${msg.lang}/messages.json`))
+    .then((r) => r.json())
+    .then(reply, () => reply(null));
+  return true; // async reply
 });

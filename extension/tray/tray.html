@@ -3,14 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Ad Tray</title>
+  <title>GoGoChay</title>
   <link rel="stylesheet" href="tray.css">
 </head>
 <body>
   <header>
     <div class="brand">
       <img src="../icons/icon32.png" alt="" width="20" height="20">
-      <strong>Ad Tray</strong>
+      <strong>GoGoChay</strong>
     </div>
     <label class="switch" data-i18n-title="toggleTitle">
       <input type="checkbox" id="enabled">
@@ -19,6 +19,7 @@
   </header>
 
   <div id="site" class="site"></div>
+  <div id="domainStatus" class="domain" hidden></div>
 
   <section class="stats">
     <div><span id="blocked" class="num">–</span><span data-i18n="statBlocked"></span></div>
@@ -30,12 +31,27 @@
     <button id="hideAll" data-i18n="hideAll"></button>
     <button id="refresh" data-i18n="refresh"></button>
   </section>
+  <section class="toolbar">
+    <button id="pick" class="primary" data-i18n="pickElement"></button>
+    <span id="custom" class="muted custom" hidden>
+      <span id="customText"></span>
+      <button id="clearCustom" class="link" data-i18n="clearCustom"></button>
+    </span>
+  </section>
+
+  <section class="options">
+    <label class="opt"><input type="checkbox" id="aggr"> <span data-i18n="aggressive"></span></label>
+    <label class="opt sub" id="aggrSiteWrap" hidden><input type="checkbox" id="aggrSite"> <span data-i18n="aggressiveHere"></span></label>
+    <p class="muted hint" data-i18n="aggressiveHint"></p>
+    <label class="opt"><input type="checkbox" id="domainCheck"> <span data-i18n="domainCheck"></span></label>
+  </section>
 
   <ul id="list" class="list"></ul>
   <p id="empty" class="empty" hidden></p>
 
   <footer>
     <button id="openPanel" class="link" data-i18n="openPanel" hidden></button>
+    <a id="about" class="link" href="../welcome/welcome.html" target="_blank" data-i18n="aboutLink"></a>
     <span id="listsInfo" class="muted"></span>
     <select id="lang" data-i18n-title="language">
       <option value="auto" data-i18n="langAuto"></option>
@@ -44,6 +60,8 @@
       <option value="fr">Français</option>
     </select>
   </footer>
+
+  <script src="../lang.js"></script>
 
   <script type="module" src="tray.js"></script>
 </body>

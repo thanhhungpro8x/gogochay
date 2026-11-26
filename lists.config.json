@@ -1,14 +1,40 @@
 {
-  "repo": "easylist/easylist",
-  "commit": "9aac2b1feb3f47e22e2f173699c81c74534fb477",
-  "files": [
-    "easylist/easylist_general_block.txt",
-    "easylist/easylist_general_hide.txt",
-    "easylist/easylist_adservers.txt",
-    "easylist/easylist_thirdparty.txt",
-    "easylist/easylist_specific_block.txt",
-    "easylist/easylist_specific_hide.txt",
-    "easylist/easylist_allowlist.txt",
-    "easylist/easylist_allowlist_general_hide.txt"
+  "sources": [
+    {
+      "id": "easylist",
+      "name": "EasyList",
+      "homepage": "https://easylist.to",
+      "license": "GPLv3 / CC BY-SA 3.0",
+      "repo": "easylist/easylist",
+      "commit": "9aac2b1feb3f47e22e2f173699c81c74534fb477",
+      "files": [
+        "easylist/easylist_general_block.txt",
+        "easylist/easylist_general_hide.txt",
+        "easylist/easylist_adservers.txt",
+        "easylist/easylist_thirdparty.txt",
+        "easylist/easylist_specific_block.txt",
+        "easylist/easylist_specific_hide.txt",
+        "easylist/easylist_allowlist.txt",
+        "easylist/easylist_allowlist_general_hide.txt"
+      ]
+    },
+    {
+      "id": "liste_fr",
+      "name": "Liste FR (French sites)",
+      "homepage": "https://github.com/easylist/listefr",
+      "license": "CC BY-SA 3.0",
+      "repo": "easylist/listefr",
+      "commit": "2919802d20c98f73139c6767ff7dede947c87faf",
+      "files": ["liste_fr.txt"]
+    },
+    {
+      "id": "abpvn",
+      "name": "ABPVN (Vietnamese sites)",
+      "homepage": "https://abpvn.com",
+      "license": "GPLv3",
+      "repo": "abpvn/abpvn",
+      "commit": "d8e5caa323905f869c266d9fd4bb0d809dc93fbe",
+      "files": ["filter/abpvn.txt"]
+    }
   ]
 }

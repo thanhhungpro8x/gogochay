@@ -1,13 +1,19 @@
-Ad Tray
+GoGoChay
 Copyright (c) 2026 Thanh-Hung DOAN — source code licensed under the MIT License (see LICENSE).
 
 Bundled filter data
 -------------------
-extension/rules/easylist.json and extension/data/cosmetic.js are generated from
-EasyList (https://easylist.to, https://github.com/easylist/easylist), the exact
-commit is recorded in extension/data/lists-info.json.
+extension/rules/*.json and extension/data/cosmetic.js are generated from the
+filter lists below, at the exact commits recorded in lists.config.json and
+extension/data/lists-info.json. Each list keeps its own license:
 
-EasyList is dual licensed under the GNU General Public License v3 and the
-Creative Commons Attribution-ShareAlike 3.0 Unported license
-(https://creativecommons.org/licenses/by-sa/3.0/). Ad Tray redistributes this
-data, in converted form, under CC BY-SA 3.0. Credit: The EasyList authors.
+* EasyList — https://easylist.to — dual licensed GPLv3 / CC BY-SA 3.0.
+  Credit: The EasyList authors.
+* Liste FR — https://github.com/easylist/listefr — CC BY-SA 3.0.
+  Credit: The Liste FR authors.
+* ABPVN List — https://abpvn.com — GPLv3.
+  Credit: ABPVN.
+
+The converted data is redistributed under those same licenses
+(CC BY-SA 3.0 for EasyList and Liste FR, GPLv3 for ABPVN). GoGoChay's own
+source code stays under the MIT License.

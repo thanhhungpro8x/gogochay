@@ -1,9 +1,9 @@
 {
   "extName": {
-    "message": "Ad Tray — bloqueur de pub open source"
+    "message": "GoGoChay – bloqueur de pubs & alerte faux sites"
   },
   "extDescription": {
-    "message": "Bloque les publicités et range celles qui sont masquées dans un plateau. Open source, aucun accès réseau, aucune collecte de données."
+    "message": "Bloque les pubs, range celles qui sont masquées dans un plateau et avertit des fausses adresses de sites. Open source, aucune collecte de données."
   },
   "toggleTitle": {
     "message": "Bloquer les pubs sur ce site"
@@ -33,7 +33,7 @@
     "message": "Ouvrir dans le panneau latéral"
   },
   "unsupported": {
-    "message": "Ad Tray ne peut pas fonctionner sur cette page."
+    "message": "GoGoChay ne peut pas fonctionner sur cette page."
   },
   "pausedHere": {
     "message": "En pause sur ce site. Réactivez pour bloquer les pubs."
@@ -42,7 +42,7 @@
     "message": "Aucune pub masquée sur cette page."
   },
   "listsInfo": {
-    "message": "EasyList du $DATE$",
+    "message": "Listes du $DATE$",
     "placeholders": {
       "date": {
         "content": "$1"
@@ -54,5 +54,235 @@
   },
   "langAuto": {
     "message": "Langue du navigateur"
+  },
+  "pickElement": {
+    "message": "Masquer un élément…"
+  },
+  "pickHint": {
+    "message": "Cliquez ou touchez ce qu’il faut masquer"
+  },
+  "customCount": {
+    "message": "$COUNT$ masqué(s) par vous",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "clearCustom": {
+    "message": "Annuler"
+  },
+  "aggressive": {
+    "message": "Blocage renforcé (expérimental)"
+  },
+  "aggressiveHere": {
+    "message": "…sur ce site"
+  },
+  "aggressiveHint": {
+    "message": "Masque aussi les blocs qui ressemblent à des pubs (identifiants d’emplacements, mention « Publicité »). Peut masquer à tort : décochez alors « sur ce site »."
+  },
+  "spoofTitle": {
+    "message": "⚠ Cette adresse est peut-être fausse"
+  },
+  "spoofTitleBrand": {
+    "message": "⚠ Ce site se fait peut-être passer pour « $BRAND$ »",
+    "placeholders": {
+      "brand": {
+        "content": "$1"
+      }
+    }
+  },
+  "spoofTitleWarn": {
+    "message": "⚠ Cette adresse peut être trompeuse"
+  },
+  "spoofMixed": {
+    "message": "mélange des lettres de plusieurs alphabets ($SCRIPTS$). Les lettres surlignées ne font que ressembler à des lettres normales.",
+    "placeholders": {
+      "scripts": {
+        "content": "$1"
+      }
+    }
+  },
+  "spoofWhole": {
+    "message": "est écrit en lettres $SCRIPT$ qui ressemblent à « $LOOKS$ ».",
+    "placeholders": {
+      "script": {
+        "content": "$1"
+      },
+      "looks": {
+        "content": "$2"
+      }
+    }
+  },
+  "spoofLookalike": {
+    "message": "ressemble à « $BRAND$ » mais c’est un autre nom.",
+    "placeholders": {
+      "brand": {
+        "content": "$1"
+      }
+    }
+  },
+  "spoofSubdomain": {
+    "message": "L’adresse commence par « $PREFIX$ », mais le site réellement ouvert est « $REAL$ ».",
+    "placeholders": {
+      "prefix": {
+        "content": "$1"
+      },
+      "real": {
+        "content": "$2"
+      }
+    }
+  },
+  "spoofRealAddress": {
+    "message": "Le site que vous êtes en train de consulter est :"
+  },
+  "spoofLeave": {
+    "message": "Quitter ce site"
+  },
+  "spoofTrust": {
+    "message": "Je connais ce site, continuer"
+  },
+  "domainCheck": {
+    "message": "Avertir des fausses adresses"
+  },
+  "domainOk": {
+    "message": "Aucun caractère suspect dans l’adresse"
+  },
+  "domainBad": {
+    "message": "⚠ Adresse suspecte"
+  },
+  "domainTrusted": {
+    "message": "Vous avez marqué cette adresse comme fiable"
+  },
+  "pickParent": {
+    "message": "↑ Plus grand"
+  },
+  "pickHide": {
+    "message": "✓ Masquer"
+  },
+  "pickCancel": {
+    "message": "✕ Annuler"
+  },
+  "spoofRare": {
+    "message": "utilise des lettres rares qui ne font que ressembler aux lettres normales : on lit « $LOOKS$ ».",
+    "placeholders": {
+      "looks": {
+        "content": "$1"
+      }
+    }
+  },
+  "loginTitle": {
+    "message": "⚠ Vérifiez l’adresse avant de saisir votre mot de passe"
+  },
+  "loginSpecial": {
+    "message": "contient des caractères hors a–z (surlignés). Assurez-vous que c’est bien le site que vous vouliez ouvrir."
+  },
+  "domainSpecial": {
+    "message": "ℹ L’adresse contient des caractères hors a–z : $CHARS$",
+    "placeholders": {
+      "chars": {
+        "content": "$1"
+      }
+    }
+  },
+  "w_title": {
+    "message": "GoGoChay est installé"
+  },
+  "w_intro": {
+    "message": "Un bloqueur de pubs qui vous montre ce qu’il a masqué, et qui vous avertit quand une adresse se fait passer pour un autre site. Tout fonctionne sur votre appareil."
+  },
+  "w_start": {
+    "message": "Pour commencer"
+  },
+  "w_step_pin": {
+    "message": "Épinglez l’icône GoGoChay dans la barre d’outils (menu pièce de puzzle → épingler) pour ouvrir le plateau en un clic."
+  },
+  "w_step_perm": {
+    "message": "Safari, Firefox et mobiles : autorisez GoGoChay sur tous les sites (Safari : Réglages › Extensions › « Toujours autoriser sur tous les sites » ; Firefox : about:addons › GoGoChay › Permissions). Sinon, les pubs sont bloquées mais leurs emplacements restent visibles."
+  },
+  "w_step_tray": {
+    "message": "Sur n’importe quelle page, cliquez sur l’icône pour ouvrir le plateau : voir ce qui a été masqué, masquer davantage ou mettre GoGoChay en pause sur ce site."
+  },
+  "w_ads_title": {
+    "message": "Blocage des pubs"
+  },
+  "w_ads_1": {
+    "message": "Bloque les requêtes publicitaires avec EasyList, Liste FR (sites français) et ABPVN (sites vietnamiens). C’est le navigateur qui bloque : GoGoChay ne voit jamais votre trafic."
+  },
+  "w_ads_2": {
+    "message": "Masque bannières, blocs « Sponsorisé » et emplacements publicitaires vides dès le chargement."
+  },
+  "w_ads_3": {
+    "message": "Blocage renforcé (désactivé par défaut) : masque aussi les blocs qui ressemblent à des pubs sur les sites qu’aucune liste ne couvre, par exemple un bloc vide marqué « Publicité ». Désactivable par site."
+  },
+  "w_tray_title": {
+    "message": "Le plateau"
+  },
+  "w_tray_1": {
+    "message": "Liste chaque pub masquée sur la page : sa provenance, sa taille, son texte."
+  },
+  "w_tray_2": {
+    "message": "Réaffiche une pub (ou toutes) si le masquage casse la page."
+  },
+  "w_tray_3": {
+    "message": "« Masquer un élément… » : cliquez ou touchez ce que les listes ont manqué. Il reste masqué sur ce site ; « Annuler » le rétablit."
+  },
+  "w_tray_4": {
+    "message": "Pause par site, choix de la langue, ouverture dans le panneau latéral (Chrome) ou la barre latérale (Firefox)."
+  },
+  "w_fake_title": {
+    "message": "Alerte fausses adresses"
+  },
+  "w_fake_intro": {
+    "message": "GoGoChay vérifie l’adresse de la page où vous arrivez réellement, même après une redirection depuis Facebook, un e-mail ou une messagerie, et vous avertit si elle imite un autre site."
+  },
+  "w_fake_red_t": {
+    "message": "🔴 Barre rouge : presque certainement faux"
+  },
+  "w_fake_red": {
+    "message": "Le nom mélange des alphabets, utilise des lettres rares qui imitent a–z, ou copie un site connu (banques, PayPal, Google, Ameli, Vietcombank…)."
+  },
+  "w_fake_yellow_t": {
+    "message": "🟡 Rappel jaune : vérifiez avant de vous connecter"
+  },
+  "w_fake_yellow": {
+    "message": "Le nom contient des caractères hors a–z (souvent de simples accents). GoGoChay ne vous le rappelle qu’au moment de cliquer dans un champ mot de passe ou numéro de carte."
+  },
+  "w_fake_note": {
+    "message": "L’alerte surligne les lettres trompeuses et indique le site réellement consulté, avec les boutons « Quitter ce site » et « Je connais ce site ». Elle repère les imitations ; pour les sites frauduleux inédits, gardez la protection anti-hameçonnage de votre navigateur activée."
+  },
+  "w_priv_title": {
+    "message": "Confidentialité"
+  },
+  "w_priv_1": {
+    "message": "Aucune donnée ne quitte votre appareil : aucune requête réseau, aucune statistique, aucune mise à jour à distance."
+  },
+  "w_priv_2": {
+    "message": "Seuls vos réglages sont enregistrés, localement : sites en pause, éléments masqués, langue, sites de confiance."
+  },
+  "w_priv_3": {
+    "message": "Open source (MIT). Les listes de filtres sont reconstruites en CI à partir de sources publiques, vérifiables par tous."
+  },
+  "w_source": {
+    "message": "Code source sur GitHub"
+  },
+  "w_privacy": {
+    "message": "Politique de confidentialité"
+  },
+  "aboutLink": {
+    "message": "Fonctionnalités"
+  },
+  "langCode": {
+    "message": "fr",
+    "description": "Do not translate: language code of this file"
+  },
+  "spoofDisclaimer": {
+    "message": "Alerte automatique fondée sur des caractères suspects dans l’adresse. Elle peut se tromper : elle ne prouve pas que le site est frauduleux, et l’absence d’alerte ne garantit pas qu’un site est sûr."
+  },
+  "w_disclaimer": {
+    "message": "Les alertes sont automatiques : elles examinent uniquement les caractères de l’adresse et sa ressemblance avec des noms connus, pas le contenu de la page. Elles peuvent se tromper dans les deux sens : une alerte ne prouve pas qu’un site est frauduleux, et l’absence d’alerte ne garantit pas qu’un site est sûr. Les noms de marques ne servent qu’à la comparaison ; GoGoChay n’est affilié à aucune d’elles."
+  },
+  "w_tagline": {
+    "message": "Les pubs ? Rangées. Les faux sites ? Démasqués."
   }
 }

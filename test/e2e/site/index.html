@@ -1,4 +1,4 @@
-<!doctype html><html><head><title>News test</title></head><body>
+<!doctype html><html><head><meta charset="utf-8"><title>News test</title></head><body>
 <h1 id="headline">Real article headline</h1>
 <p id="content">Real content stays visible.</p>
 <div id="AdBox2"><a href="https://shop.example.org/promo">Buy cheap shoes now!</a></div>
@@ -6,5 +6,19 @@
 <div class="ad-slot"><iframe src="http://ib.adnxs.com:__PORT__/frame.html" width="300" height="250"></iframe></div>
 <script src="http://ib.adnxs.com:__PORT__/ad.js"></script>
 <script src="http://pagead2.googlesyndication.com:__PORT__/pagead/js/adsbygoogle.js"></script>
+<script src="http://cdn.taboola.com:__PORT__/libtrc/site/loader.js"></script>
+<div id="leftover-2" style="width:300px;height:100px;background:#eee">another leftover</div>
+<div id="leftover-box" style="width:300px;height:120px;background:#ddd">Publicité (not in any list)</div>
+<!-- aggressive mode: should be hidden only when it is on -->
+<div id="ADS_99_box" style="height:250px;background:#cfc">placeholder</div>
+<div class="pub-wrap"><div class="pub-label">Publicité</div><div class="pub-slot" style="height:250px;background:#e4e4e4"></div></div>
+<style>.css-label::before{content:"Publicité";display:block}</style>
+<div class="inread-slot css-label" id="csslabel" style="height:200px;background:#e4e4e4"></div>
+<!-- aggressive mode: must never be hidden -->
+<div class="quote css-q" id="cssquote" style="height:40px"><p>Short</p></div>
+<article id="story"><h2>Advertisement policy</h2><p>This is a real article paragraph about how the newspaper handles advertisement, long enough to count as content.</p></article>
+<nav id="mainnav"><a href="/ads">Advertising</a></nav>
+<div id="note"><span>Ad</span><p>This paragraph is real content that is long enough to count as an actual article paragraph here.</p></div>
+<form class="adv-search" id="advsearch"><input name="q"></form>
 <script src="/first-party.js"></script>
 </body></html>

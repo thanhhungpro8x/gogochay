@@ -1,9 +1,9 @@
 {
   "extName": {
-    "message": "Ad Tray — chặn quảng cáo mã nguồn mở"
+    "message": "GoGoChay – chặn quảng cáo & cảnh báo trang giả"
   },
   "extDescription": {
-    "message": "Chặn quảng cáo và gom các quảng cáo bị ẩn vào một khay. Mã nguồn mở, không truy cập mạng, không thu thập dữ liệu."
+    "message": "Chặn quảng cáo, gom quảng cáo bị ẩn vào một khay và cảnh báo địa chỉ trang giả mạo. Mã nguồn mở, không thu thập dữ liệu."
   },
   "toggleTitle": {
     "message": "Chặn quảng cáo trên trang này"
@@ -33,7 +33,7 @@
     "message": "Mở ở thanh bên"
   },
   "unsupported": {
-    "message": "Ad Tray không chạy được trên trang này."
+    "message": "GoGoChay không chạy được trên trang này."
   },
   "pausedHere": {
     "message": "Đang tạm tắt trên trang này. Bật lại để chặn quảng cáo."
@@ -42,7 +42,7 @@
     "message": "Không có quảng cáo nào bị ẩn trên trang này."
   },
   "listsInfo": {
-    "message": "EasyList ngày $DATE$",
+    "message": "Danh sách ngày $DATE$",
     "placeholders": {
       "date": {
         "content": "$1"
@@ -54,5 +54,235 @@
   },
   "langAuto": {
     "message": "Theo trình duyệt"
+  },
+  "pickElement": {
+    "message": "Ẩn thêm phần tử…"
+  },
+  "pickHint": {
+    "message": "Bấm hoặc chạm vào phần muốn ẩn"
+  },
+  "customCount": {
+    "message": "$COUNT$ do bạn ẩn",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "clearCustom": {
+    "message": "Hoàn tác"
+  },
+  "aggressive": {
+    "message": "Chặn mạnh (thử nghiệm)"
+  },
+  "aggressiveHere": {
+    "message": "…trên trang này"
+  },
+  "aggressiveHint": {
+    "message": "Ẩn thêm các khung trông giống quảng cáo (id khung quảng cáo, nhãn “Quảng cáo”). Có thể ẩn nhầm: khi đó bỏ tick “trên trang này”."
+  },
+  "spoofTitle": {
+    "message": "⚠ Địa chỉ trang này có thể là giả"
+  },
+  "spoofTitleBrand": {
+    "message": "⚠ Trang này có thể đang giả mạo “$BRAND$”",
+    "placeholders": {
+      "brand": {
+        "content": "$1"
+      }
+    }
+  },
+  "spoofTitleWarn": {
+    "message": "⚠ Địa chỉ trang này có thể gây hiểu nhầm"
+  },
+  "spoofMixed": {
+    "message": "trộn chữ của nhiều bảng chữ cái ($SCRIPTS$). Các chữ được tô chỉ trông giống chữ thường.",
+    "placeholders": {
+      "scripts": {
+        "content": "$1"
+      }
+    }
+  },
+  "spoofWhole": {
+    "message": "được viết bằng chữ $SCRIPT$ trông giống “$LOOKS$”.",
+    "placeholders": {
+      "script": {
+        "content": "$1"
+      },
+      "looks": {
+        "content": "$2"
+      }
+    }
+  },
+  "spoofLookalike": {
+    "message": "trông giống “$BRAND$” nhưng là một tên khác.",
+    "placeholders": {
+      "brand": {
+        "content": "$1"
+      }
+    }
+  },
+  "spoofSubdomain": {
+    "message": "Địa chỉ bắt đầu bằng “$PREFIX$”, nhưng trang bạn đang thật sự vào là “$REAL$”.",
+    "placeholders": {
+      "prefix": {
+        "content": "$1"
+      },
+      "real": {
+        "content": "$2"
+      }
+    }
+  },
+  "spoofRealAddress": {
+    "message": "Tên trang bạn đang truy cập là:"
+  },
+  "spoofLeave": {
+    "message": "Rời khỏi trang này"
+  },
+  "spoofTrust": {
+    "message": "Tôi biết trang này, tiếp tục"
+  },
+  "domainCheck": {
+    "message": "Cảnh báo địa chỉ trang giả mạo"
+  },
+  "domainOk": {
+    "message": "Không thấy ký tự đáng ngờ trong địa chỉ"
+  },
+  "domainBad": {
+    "message": "⚠ Địa chỉ trang đáng ngờ"
+  },
+  "domainTrusted": {
+    "message": "Bạn đã đánh dấu tin tưởng địa chỉ này"
+  },
+  "pickParent": {
+    "message": "↑ Khung lớn hơn"
+  },
+  "pickHide": {
+    "message": "✓ Ẩn"
+  },
+  "pickCancel": {
+    "message": "✕ Huỷ"
+  },
+  "spoofRare": {
+    "message": "dùng chữ hiếm, chỉ trông giống chữ thường: đọc thành “$LOOKS$”.",
+    "placeholders": {
+      "looks": {
+        "content": "$1"
+      }
+    }
+  },
+  "loginTitle": {
+    "message": "⚠ Kiểm tra kỹ địa chỉ trước khi nhập mật khẩu"
+  },
+  "loginSpecial": {
+    "message": "có ký tự ngoài a–z (được tô). Hãy chắc chắn đây đúng là trang bạn định vào."
+  },
+  "domainSpecial": {
+    "message": "ℹ Địa chỉ có ký tự ngoài a–z: $CHARS$",
+    "placeholders": {
+      "chars": {
+        "content": "$1"
+      }
+    }
+  },
+  "w_title": {
+    "message": "Đã cài GoGoChay"
+  },
+  "w_intro": {
+    "message": "Trình chặn quảng cáo cho bạn xem nó đã ẩn những gì, và cảnh báo khi một địa chỉ trang đang giả làm trang khác. Mọi thứ chạy ngay trên máy bạn."
+  },
+  "w_start": {
+    "message": "Bắt đầu"
+  },
+  "w_step_pin": {
+    "message": "Ghim icon GoGoChay lên thanh công cụ (menu hình mảnh ghép → ghim) để mở khay chỉ với một cú bấm."
+  },
+  "w_step_perm": {
+    "message": "Với Safari, Firefox và điện thoại: cho phép GoGoChay chạy trên mọi trang (Safari: Settings › Extensions › \"Always Allow on Every Website\"; Firefox: about:addons › GoGoChay › Permissions). Nếu không, quảng cáo vẫn bị chặn nhưng các khung quảng cáo vẫn còn."
+  },
+  "w_step_tray": {
+    "message": "Ở bất kỳ trang nào, bấm icon để mở khay: xem những gì đã bị ẩn, ẩn thêm, hoặc tạm tắt GoGoChay cho trang đó."
+  },
+  "w_ads_title": {
+    "message": "Chặn quảng cáo"
+  },
+  "w_ads_1": {
+    "message": "Chặn request quảng cáo bằng EasyList, Liste FR (trang Pháp) và ABPVN (trang Việt). Việc chặn do chính trình duyệt làm, nên GoGoChay không bao giờ thấy dữ liệu duyệt web của bạn."
+  },
+  "w_ads_2": {
+    "message": "Ẩn banner, khối “Sponsored” và ô giữ chỗ quảng cáo rỗng ngay khi trang tải."
+  },
+  "w_ads_3": {
+    "message": "Chặn mạnh (mặc định tắt): ẩn thêm các khung trông giống quảng cáo trên những trang chưa có danh sách nào nhắm tới, ví dụ khung rỗng có nhãn “Quảng cáo”. Tắt riêng được cho từng trang."
+  },
+  "w_tray_title": {
+    "message": "Khay quảng cáo"
+  },
+  "w_tray_1": {
+    "message": "Liệt kê mọi quảng cáo đã bị ẩn trên trang: nguồn, kích thước, nội dung."
+  },
+  "w_tray_2": {
+    "message": "Hiện lại một quảng cáo (hoặc tất cả) nếu việc ẩn làm vỡ trang."
+  },
+  "w_tray_3": {
+    "message": "“Ẩn thêm phần tử…”: bấm hoặc chạm vào phần còn sót. Nó sẽ bị ẩn trên trang đó từ đây về sau; bấm “Hoàn tác” để bỏ."
+  },
+  "w_tray_4": {
+    "message": "Tạm tắt GoGoChay trên một trang, đổi ngôn ngữ, mở ở Side Panel (Chrome) hoặc sidebar (Firefox)."
+  },
+  "w_fake_title": {
+    "message": "Cảnh báo địa chỉ giả mạo"
+  },
+  "w_fake_intro": {
+    "message": "GoGoChay kiểm tra địa chỉ của trang bạn thực sự vào, kể cả sau khi bị chuyển hướng từ Facebook, email hay tin nhắn, và cảnh báo nếu địa chỉ được làm cho giống một trang khác."
+  },
+  "w_fake_red_t": {
+    "message": "🔴 Thanh đỏ: gần như chắc chắn là giả"
+  },
+  "w_fake_red": {
+    "message": "Tên trộn nhiều bảng chữ cái, dùng chữ hiếm chỉ để trông giống a–z, hoặc nhái một trang quen (ngân hàng, PayPal, Google, Ameli, Vietcombank…)."
+  },
+  "w_fake_yellow_t": {
+    "message": "🟡 Nhắc vàng: kiểm tra trước khi đăng nhập"
+  },
+  "w_fake_yellow": {
+    "message": "Tên có ký tự ngoài a–z (thường chỉ là dấu, vô hại). GoGoChay chỉ nhắc khi bạn bấm vào ô mật khẩu hoặc số thẻ."
+  },
+  "w_fake_note": {
+    "message": "Cảnh báo tô các chữ giả và ghi rõ tên trang bạn đang truy cập, kèm hai nút “Rời khỏi trang này” và “Tôi biết trang này”. GoGoChay bắt được các tên nhái; với trang lừa đảo hoàn toàn mới, hãy giữ bật tính năng chống lừa đảo của trình duyệt."
+  },
+  "w_priv_title": {
+    "message": "Quyền riêng tư"
+  },
+  "w_priv_1": {
+    "message": "Không dữ liệu nào rời khỏi máy bạn: không request mạng, không thống kê, không cập nhật từ xa."
+  },
+  "w_priv_2": {
+    "message": "Chỉ lưu các cài đặt của bạn, ngay trên máy: trang tạm tắt, phần tử bạn ẩn, ngôn ngữ, trang tin tưởng."
+  },
+  "w_priv_3": {
+    "message": "Mã nguồn mở (MIT). Danh sách chặn được CI build lại từ nguồn công khai, ai cũng kiểm tra được."
+  },
+  "w_source": {
+    "message": "Mã nguồn trên GitHub"
+  },
+  "w_privacy": {
+    "message": "Chính sách quyền riêng tư"
+  },
+  "aboutLink": {
+    "message": "Tính năng"
+  },
+  "langCode": {
+    "message": "vi",
+    "description": "Do not translate: language code of this file"
+  },
+  "spoofDisclaimer": {
+    "message": "Cảnh báo tự động, dựa trên ký tự đáng ngờ trong địa chỉ trang. Có thể sai: cảnh báo không khẳng định trang này lừa đảo, và không có cảnh báo cũng không có nghĩa là trang an toàn."
+  },
+  "w_disclaimer": {
+    "message": "Cảnh báo được đưa ra tự động: GoGoChay chỉ xét các ký tự trong địa chỉ và mức độ giống tên của các trang quen, không xét nội dung trang. Cảnh báo có thể sai theo cả hai chiều: có cảnh báo không chứng minh trang đó lừa đảo, và không có cảnh báo cũng không có nghĩa là trang an toàn. Tên các thương hiệu chỉ được dùng để so sánh; GoGoChay không liên kết với các thương hiệu đó."
+  },
+  "w_tagline": {
+    "message": "Quảng cáo cất vào khay, tên giả lộ mặt."
   }
 }

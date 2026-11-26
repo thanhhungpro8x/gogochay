@@ -40,11 +40,17 @@ jobs:
         timeout-minutes: 5
         env:
           CHROME_PATH: ${{ steps.chrome.outputs.chrome-path }}
-      - run: mkdir -p dist && cd extension && zip -qr -X ../dist/ad-tray-chrome.zip . -x '.*'
+      - run: mkdir -p dist && cd extension && zip -qr -X ../dist/gogochay-chrome.zip . -x '.*'
       - uses: actions/upload-artifact@v5
         with:
-          name: ad-tray-chrome
-          path: dist/ad-tray-chrome.zip
+          name: gogochay-chrome
+          path: dist/gogochay-chrome.zip
+      # Firefox: same code, adapted manifest; Mozilla's linter must report 0 errors
+      - run: npm run lint:firefox
+      - uses: actions/upload-artifact@v5
+        with:
+          name: gogochay-firefox
+          path: dist/gogochay-firefox.zip
 
   # Builds the Safari version on GitHub's macOS machines (they have Xcode), so you
   # don't need Xcode locally. Ad-hoc signed ("Sign to Run Locally"): fine for testing
@@ -60,18 +66,18 @@ jobs:
       - name: Convert to a Safari Web Extension project
         run: |
           xcrun safari-web-extension-converter extension \
-            --project-location safari --app-name "Ad Tray" \
-            --bundle-identifier fr.thanhhungdoan.adtray \
+            --project-location safari --app-name "GoGoChay" \
+            --bundle-identifier fr.thanhhungdoan.gogochay \
             --swift --macos-only --copy-resources --no-open --no-prompt --force
-          # The converter derives the app's ID from its name (fr.thanhhungdoan.Ad-Tray);
-          # the extension's ID must start with the app's, so pin the app to fr.thanhhungdoan.adtray.
-          sed -i '' 's/PRODUCT_BUNDLE_IDENTIFIER = "fr.thanhhungdoan.Ad-Tray";/PRODUCT_BUNDLE_IDENTIFIER = fr.thanhhungdoan.adtray;/; s/PRODUCT_BUNDLE_IDENTIFIER = fr.thanhhungdoan.Ad-Tray;/PRODUCT_BUNDLE_IDENTIFIER = fr.thanhhungdoan.adtray;/' "safari/Ad Tray/Ad Tray.xcodeproj/project.pbxproj"
-          grep -n PRODUCT_BUNDLE_IDENTIFIER "safari/Ad Tray/Ad Tray.xcodeproj/project.pbxproj"
-          xcodebuild -list -project "safari/Ad Tray/Ad Tray.xcodeproj"
+          # The converter derives the app's ID from its name (e.g. fr.thanhhungdoan.GoGoChay);
+          # the extension's ID must start with the app's, so pin the app to fr.thanhhungdoan.gogochay.
+          sed -i '' -E 's/PRODUCT_BUNDLE_IDENTIFIER = "?fr\.thanhhungdoan\.[A-Za-z-]+"?;/PRODUCT_BUNDLE_IDENTIFIER = fr.thanhhungdoan.gogochay;/' "safari/GoGoChay/GoGoChay.xcodeproj/project.pbxproj"
+          grep -n PRODUCT_BUNDLE_IDENTIFIER "safari/GoGoChay/GoGoChay.xcodeproj/project.pbxproj"
+          xcodebuild -list -project "safari/GoGoChay/GoGoChay.xcodeproj"
       - name: Build (unsigned)
         run: |
           set -o pipefail
-          xcodebuild -project "safari/Ad Tray/Ad Tray.xcodeproj" -scheme "Ad Tray" \
+          xcodebuild -project "safari/GoGoChay/GoGoChay.xcodeproj" -scheme "GoGoChay" \
             -configuration Release -derivedDataPath build \
             CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" \
             build 2>&1 | tee xcodebuild.log || {
@@ -81,7 +87,7 @@ jobs:
       - name: Sign ad-hoc (entitlements in safari-config/)
         run: |
           set -euo pipefail
-          APP="build/Build/Products/Release/Ad Tray.app"
+          APP="build/Build/Products/Release/GoGoChay.app"
           EXT="$(find "$APP/Contents/PlugIns" -maxdepth 1 -name '*.appex' | head -1)"
           test -n "$EXT" || { echo "::error::No .appex found in $APP/Contents/PlugIns"; exit 1; }
           # inside-out: the extension first, then the app that contains it
@@ -92,8 +98,8 @@ jobs:
       - name: Zip the app
         run: |
           mkdir -p dist
-          ditto -c -k --keepParent "build/Build/Products/Release/Ad Tray.app" dist/ad-tray-safari.zip
+          ditto -c -k --keepParent "build/Build/Products/Release/GoGoChay.app" dist/gogochay-safari.zip
       - uses: actions/upload-artifact@v5
         with:
-          name: ad-tray-safari
-          path: dist/ad-tray-safari.zip
+          name: gogochay-safari
+          path: dist/gogochay-safari.zip

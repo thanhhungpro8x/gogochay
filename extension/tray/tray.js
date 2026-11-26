@@ -1,27 +1,16 @@
-// Ad Tray — tray UI (toolbar popup, and side panel in Chrome).
+// GoGoChay — tray UI (toolbar popup, and side panel in Chrome).
 // Everything shown here comes from the current tab's content script and is rendered
 // with textContent only (never innerHTML), so page content can't inject markup.
 
-const LANGS = ['en', 'vi', 'fr'];
-let messages = null; // set when the user picked a language other than the browser's
+const { LANGS } = self.AdTrayLang;
+let messages = null; // loaded when the user picked a language, or the browser's wasn't mapped
 
-// Same format as chrome.i18n: messages.json with optional $NAME$ placeholders.
-function t(key, subs = []) {
-  const entry = messages?.[key];
-  if (!entry) return chrome.i18n.getMessage(key, subs) || key;
-  let text = entry.message;
-  for (const [name, ph] of Object.entries(entry.placeholders || {})) {
-    const n = Number(ph.content.replace('$', '')) - 1;
-    text = text.replace(new RegExp(`\\$${name}\\$`, 'gi'), subs[n] ?? '');
-  }
-  return text;
-}
+const t = (key, subs = []) => self.AdTrayLang.format(messages, key, subs) ?? (chrome.i18n.getMessage(key, subs) || key);
 
 async function loadLanguage() {
   const { lang = 'auto' } = await chrome.storage.local.get('lang');
-  if (LANGS.includes(lang)) {
-    messages = await fetch(`../_locales/${lang}/messages.json`).then((r) => r.json()).catch(() => null);
-  }
+  const use = self.AdTrayLang.pick(lang);
+  if (use) messages = await fetch(`../_locales/${use}/messages.json`).then((r) => r.json()).catch(() => null);
   for (const el of document.querySelectorAll('[data-i18n]')) el.textContent = t(el.dataset.i18n);
   for (const el of document.querySelectorAll('[data-i18n-title]')) el.title = t(el.dataset.i18nTitle);
   const select = $('lang');
@@ -121,6 +110,25 @@ async function refresh() {
   enabled.disabled = false;
   enabled.checked = !paused.includes(host);
   $('hidden').textContent = String(res.items.length);
+  $('pick').disabled = !enabled.checked;
+  const { aggressive = {} } = await chrome.storage.local.get('aggressive');
+  $('aggr').checked = !!aggressive.enabled;
+  $('aggr').disabled = !enabled.checked;
+  $('aggrSiteWrap').hidden = !aggressive.enabled || !enabled.checked;
+  $('aggrSite').checked = !(aggressive.off || []).includes(host);
+
+  const { domainCheck = true, trustedHosts = [] } = await chrome.storage.local.get(['domainCheck', 'trustedHosts']);
+  $('domainCheck').checked = domainCheck;
+  const ds = $('domainStatus');
+  const risky = res.domain && res.domain.risk !== 'none';
+  ds.hidden = !domainCheck;
+  ds.className = 'domain' + (risky && !trustedHosts.includes(host) ? ' bad' : '');
+  const special = res.domain?.special || [];
+  ds.textContent = risky ? (trustedHosts.includes(host) ? t('domainTrusted') : t('domainBad'))
+    : special.length ? t('domainSpecial', [special.join(' ')]) : t('domainOk');
+  if (risky) ds.title = res.domain.unicode;
+  $('custom').hidden = !res.customCount;
+  $('customText').textContent = t('customCount', [String(res.customCount)]);
 
   if (!enabled.checked) {
     $('empty').textContent = t('pausedHere');
@@ -149,11 +157,46 @@ $('showAll').addEventListener('click', async () => { await send({ type: 'adtray:
 $('hideAll').addEventListener('click', async () => { await send({ type: 'adtray:hideAll' }).catch(() => {}); refresh(); });
 $('refresh').addEventListener('click', refresh);
 
-if (chrome.sidePanel?.open && !isPanel) {
+async function saveAggressive(change) {
+  const { aggressive = {} } = await chrome.storage.local.get('aggressive');
+  const next = { enabled: !!aggressive.enabled, off: aggressive.off || [], ...change(aggressive) };
+  await chrome.storage.local.set({ aggressive: next });
+  await chrome.tabs.reload(tabId);
+  setTimeout(refresh, 900);
+}
+$('aggr').addEventListener('change', (e) => saveAggressive(() => ({ enabled: e.target.checked })));
+$('aggrSite').addEventListener('change', (e) => saveAggressive((a) => ({
+  off: e.target.checked ? (a.off || []).filter((h) => h !== host) : [...new Set([...(a.off || []), host])],
+})));
+
+$('domainCheck').addEventListener('change', async (e) => {
+  await chrome.storage.local.set({ domainCheck: e.target.checked });
+  refresh();
+});
+
+$('pick').addEventListener('click', async () => {
+  await send({ type: 'adtray:pick', labels: { hint: t('pickHint'), parent: t('pickParent'), hide: t('pickHide'), cancel: t('pickCancel') } }).catch(() => {});
+  if (!isPanel) window.close(); // the popup would cover the page
+});
+$('clearCustom').addEventListener('click', async () => {
+  await send({ type: 'adtray:clearCustom' }).catch(() => {});
+  await chrome.tabs.reload(tabId);
+  setTimeout(refresh, 800);
+});
+// the page tells us when the user hid something with the picker (side panel stays open)
+chrome.runtime.onMessage.addListener((msg) => { if (msg?.type === 'adtray:changed') refresh(); });
+
+// Chrome: side panel. Firefox: sidebar. Safari: neither, popup only.
+const firefoxSidebar = globalThis.browser?.sidebarAction;
+if (!isPanel && (chrome.sidePanel?.open || firefoxSidebar?.open)) {
   $('openPanel').hidden = false;
   $('openPanel').addEventListener('click', async () => {
-    const tab = await activeTab();
-    await chrome.sidePanel.open({ windowId: tab.windowId });
+    if (chrome.sidePanel?.open) {
+      const tab = await activeTab();
+      await chrome.sidePanel.open({ windowId: tab.windowId });
+    } else {
+      await firefoxSidebar.open();
+    }
     window.close();
   });
 }
@@ -172,7 +215,7 @@ fetch('../data/lists-info.json')
   .then((info) => {
     const date = info.generatedAt?.slice(0, 10) || '';
     $('listsInfo').textContent = t('listsInfo', [date]);
-    $('listsInfo').title = `${info.source} @ ${info.commit}`;
+    $('listsInfo').title = (info.lists || []).map((l) => `${l.name}: ${l.source} @ ${l.commit.slice(0, 7)}`).join('\n');
   })
   .catch(() => {});
 

@@ -65,3 +65,15 @@ test('convertLists compresses domain rules and applies exceptions', () => {
   assert.deepEqual(cosmetic.exceptions, { 'site.com': ['.ad-banner'] });
   assert.deepEqual(cosmetic.genericHide, ['site.com']);
 });
+
+test('mergeCosmetic unions lists', async () => {
+  const { mergeCosmetic } = await import('../scripts/convert.mjs');
+  const m = mergeCosmetic([
+    { generic: ['.a'], specific: { 'x.com': ['.p'] }, exceptions: {}, genericHide: [], elemHide: [] },
+    { generic: ['.a', '.b'], specific: { 'x.com': ['.q'] }, exceptions: { 'y.com': ['.a'] }, genericHide: ['z.com'], elemHide: [] },
+  ]);
+  assert.deepEqual(m.generic, ['.a', '.b']);
+  assert.deepEqual(m.specific, { 'x.com': ['.p', '.q'] });
+  assert.deepEqual(m.exceptions, { 'y.com': ['.a'] });
+  assert.deepEqual(m.genericHide, ['z.com']);
+});
