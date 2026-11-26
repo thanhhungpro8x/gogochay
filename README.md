@@ -155,10 +155,11 @@ EasyList, Liste FR, ABPVN      ┌─► rules/<list>.json   (one ruleset per li
 
 ## Publishing
 
-* **Chrome Web Store**: one-time $5 developer fee. Upload `dist/gogochay-chrome.zip`. Point the "single purpose" field to ad blocking and the privacy fields to "does not collect data".
-* **Safari / Mac App Store**: needs the Apple Developer Program. Archive the Xcode project made by `build-safari.sh`.
+Everything needed for the stores is in [`store/`](store/): listing texts in English, Vietnamese and French, permission justifications, privacy answers, notes for Mozilla's reviewers, and the screenshots and promo tiles (generated from the real extension by `npm run store:assets`).
 
----
+* **Chrome Web Store** (Chrome, Edge, Brave, Vivaldi): [`store/chrome-web-store.md`](store/chrome-web-store.md), upload `dist/gogochay-chrome.zip` (`npm run package`).
+* **addons.mozilla.org** (Firefox desktop & Android): [`store/firefox-amo.md`](store/firefox-amo.md), upload `dist/gogochay-firefox.zip` plus the source package `dist/gogochay-source.zip` (`npm run package:source`).
+* **Safari / Mac App Store**: needs the Apple Developer Program; archive the Xcode project made by `build-safari.sh`.
 
 ## Tiếng Việt
 

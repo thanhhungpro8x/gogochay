@@ -3,7 +3,7 @@
     "message": "GoGoChay – bloqueur de pubs & alerte faux sites"
   },
   "extDescription": {
-    "message": "Bloque les pubs, range celles qui sont masquées dans un plateau et avertit des fausses adresses de sites. Open source, aucune collecte de données."
+    "message": "Bloque les pubs, les range dans un plateau et alerte des fausses adresses de sites. Open source, aucune collecte de données."
   },
   "toggleTitle": {
     "message": "Bloquer les pubs sur ce site"

@@ -14,7 +14,9 @@
     "package": "node scripts/verify.mjs && cd extension && zip -qr -X ../dist/gogochay-chrome.zip . -x '.*'",
     "test:e2e": "node test/e2e/e2e.test.mjs",
     "build:firefox": "node scripts/build-firefox.mjs",
-    "lint:firefox": "node scripts/build-firefox.mjs && web-ext lint --source-dir dist/firefox --self-hosted"
+    "lint:firefox": "node scripts/build-firefox.mjs && web-ext lint --source-dir dist/firefox --self-hosted",
+    "package:source": "mkdir -p dist && rm -f dist/gogochay-source.zip && zip -qr -X dist/gogochay-source.zip . -x 'node_modules/*' 'dist/*' 'chrome/*' 'safari/*' '.git/*' 'store/assets/out/*' '*.DS_Store' 'test/e2e/tray.png'",
+    "store:assets": "node store/assets/build-assets.mjs"
   },
   "engines": {
     "node": ">=20"
